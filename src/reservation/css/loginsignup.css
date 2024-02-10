@@ -1,0 +1,196 @@
+@import url("normalize.css");
+:root {
+    /* Root scope - All set-conditions below can be used anywhere in this style-sheet */
+    --primary-color: rgb(27, 27, 27);
+    --primary-color-light: rgb(54, 54, 54);
+    --secondary-color: rgb(135, 101, 250);
+    --accent-gradient: rgb(228, 0, 171);
+    --text-primary: white;
+    --text-secondary: rgb(189, 189, 189);
+    font-size: 18px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    outline: none;
+    font-family: 'Ubuntu', sans-serif;
+    color: white;
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: linear-gradient(45deg, var(--secondary-color), var(--accent-gradient));
+}
+
+h3 {
+    display: block;
+    margin-bottom: 5px;
+    padding: 10px 15px;
+    text-align: center;
+    font-size: 18px;
+    letter-spacing: 2px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+a {
+    z-index: 1;
+}
+
+input {
+    -webkit-transition: box-shadow 250ms ease-out;
+    transition: box-shadow 250ms ease-out;
+} input::placeholder {
+    color: #d4cdcd;
+    font-size: 20px;
+} input:hover, input:focus {
+    -webkit-box-shadow: 0px 0px 18px var(--secondary-color);
+    box-shadow: 0 0 18px var(--secondary-color);
+} input:-webkit-autofill,
+  input:-webkit-autofill:hover, 
+  input:-webkit-autofill:focus, 
+  input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px var(--primary-color-light) inset !important;
+    -webkit-text-fill-color: var(--text-primary) !important;
+    box-shadow: 0 0 0 30px var(--primary-color-light) inset !important;
+}
+
+#logo {
+    margin-bottom: -0.8rem;
+    cursor: pointer;
+    z-index:1;
+}
+
+.container {
+    position: relative;
+    width: fit-content;
+    background: #0b0909;
+    padding: 20px 30px 100px 30px;
+    align-items: center;
+    border-radius: 4px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+.switch {
+    position: absolute;
+    right: 30px;
+    display: flex;
+    border-bottom: 1px solid rgb(255, 196, 0);
+} .switch.active {
+    border-bottom: 1px solid #12ff00;
+} .switch::after {
+    position: absolute;
+    content: '';
+    width: 52px;
+    height: 6px;
+    background: rgb(255, 196, 0);
+    border-radius: 60px 60px 0 0;
+    bottom: 0;
+    left: 12px;
+} .switch.active:after {
+    left: 84px;
+    width: 74px;
+    background: #12ff00
+}
+
+.login {
+    padding: 5px 12px;
+    background: linear-gradient(45deg, var(--secondary-color), var(--accent-gradient));
+    margin-bottom: 10px;
+    border-radius: 50px;
+    text-align: right;
+    font-size: 16px;
+    margin-left: 4px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.signup {
+    padding: 5px 12px;
+    margin-bottom: 10px;
+    border-radius: 50px;
+    text-align: right;
+    font-size: 16px;
+    margin-left: 4px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.container .outer {
+    position: relative;
+    margin-top: 40px;
+    width: 100%;
+    text-align: center;
+    overflow: hidden;
+}
+
+.outer #form {
+    width: 200%;
+    position: relative;
+    display: flex;
+    margin: auto;
+    transition: 0.2s ease-in-out;
+}
+
+.page {
+    margin: auto;
+    width: 100%;
+}
+
+.element {
+    position: relative;
+} .element input {
+    width: 80%;
+    height: 40px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    background: #2a2a2a;
+    border: 1px solid #f5f4f4;
+    padding-left: 40px;
+    font-size: 20px;
+    letter-spacing: 1px;
+} .element input.success {
+    border: 1px solid #00ff00
+} .element input.error {
+    border: 1px solid #ff0000
+} .element span {
+    position: absolute;
+    left: 7.75%;
+    top: 12px;
+    text-align: left;
+} .element .fa-eye, .element .fa-eye-slash {
+    cursor: pointer;
+    left: 87%;
+    text-align: right;
+} .element #email-msg, .element #username-msg, .element #password-msg {
+    position: absolute;
+    top: 2.75rem;
+    font-size: 14px;
+}
+
+.btn {
+    padding: 5px 25px;
+    background: linear-gradient(45deg, var(--accent-gradient), var(--secondary-color));
+    border-radius: 50px;
+    font-size: 25px;
+    text-transform: uppercase;
+    border: none;
+    margin-top: 5px;
+    cursor: pointer;
+    -webkit-transition: background-color 2s ease-out;  
+    transition: background-color 2s ease-out;        
+} .btn:hover, .btn:active {
+    background: linear-gradient(45deg, var(--secondary-color), var(--accent-gradient));
+    transform: scale(1.05);
+}
+
+#signup-username {
+    transition: margin-top 250ms ease;
+}

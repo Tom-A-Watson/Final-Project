@@ -1,0 +1,1 @@
+xcopy .\src\*  C:\wamp64\www /Y /s /e
