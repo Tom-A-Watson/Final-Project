@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Belanosima&display=swap');
+
+:root {
+    --primary-colour: rgb(74, 60, 37);
+    --secondary-colour: rgb(114, 71, 0);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, a {
+    scroll-behavior: smooth;
+    color: white;
+    text-decoration: none;
+}
+
+body {
+    font-family: 'Raleway', sans-serif;
+    line-height: 1.6;
+    background-color: var(--primary-colour);
+}
+
+section {
+    padding: 2em 0;
+    min-height: 100vh;
+    background-color: var(--primary-colour);
+    margin: 0 0 2em 0;
+}
+
+h2 {
+    position: relative;
+    top: 3.75rem;
+    font-size: 36px;
+    line-height: 1.2;
+}
+
+h3 {
+    position: relative;
+    top: 1.25rem;
+    font-weight: lighter;
+    font-size: 25px;
+    letter-spacing: 0.04rem;
+}
+
+h4 {
+    font-weight: bold;
+}
+
+img {
+    width: 100%;
+}
+
+li {
+    text-align: left;
+}
+
+
+/* Navbar styling */
+.navbar {
+    background-color: var(--secondary-colour);
+    margin: 0 0 75px 0;
+    font-size: 18px;
+    height: 75px;
+    width: 100%;
+    position: fixed;
+    z-index: 998;
+}
+
+#navbar-logo {
+    top: 0px;
+    margin: 0px;
+    width: 3em;
+    border-radius: 1.5em;
+}
+
+.navbar ul {
+    display: flex;
+    list-style-type: none;
+}
+
+.navbar a {
+    padding: 22px;
+} .navbar a:hover {
+    background-color: rgb(100, 61, 0);
+}

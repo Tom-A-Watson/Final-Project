@@ -3,8 +3,8 @@
     /* Root scope - All set-conditions below can be used anywhere in this style-sheet */
     --primary-color: rgb(27, 27, 27);
     --primary-color-light: rgb(54, 54, 54);
-    --secondary-color: rgb(135, 101, 250);
-    --accent-gradient: rgb(228, 0, 171);
+    --secondary-color: #24058e;
+    --accent-gradient: #b60089;
     --text-primary: white;
     --text-secondary: rgb(189, 189, 189);
     font-size: 18px;
@@ -151,8 +151,8 @@ input {
     height: 40px;
     border-radius: 4px;
     margin-bottom: 20px;
-    background: #2a2a2a;
-    border: 1px solid #f5f4f4;
+    background: rgb(32, 34, 36);
+    border: 1px solid rgb(51, 55, 57);
     padding-left: 40px;
     font-size: 20px;
     letter-spacing: 1px;
