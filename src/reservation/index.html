@@ -20,7 +20,7 @@
 
         <div class="outer">
             <div id="form">
-                <form id="pg1" class="page">
+                <form id="login-form" class="page">
                     <h3>Login to Tom's Trattoria</h3>
                     <label id="login-error" class="errorMessage"></label>
                     <div class="element">
@@ -35,11 +35,11 @@
                     <input id="login-btn" type="submit" class="btn" value="Log in">
                 </form>
 
-                <form id="pg2" class="page">
+                <form id="signup-form" class="page">
                     <h3>Sign up to Tom's Trattoria</h3>
                     <label id="signup-error" class="errorMessage"></label>
                     <div class="element">
-                        <input id="email" type="email" placeholder="Enter Email Address">
+                        <input id="signup-email" type="email" placeholder="Enter Email Address">
                         <span class="fas fa-envelope"></span>
                         <span id="email-msg"></span>
                     </div>
@@ -49,6 +49,11 @@
                     </div>
                     <div class="element">
                         <input id="signup-password" type="password" placeholder="Create Password" min="8" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$">
+                        <span class="fas fa-lock"></span>
+                        <span class="far fa-eye-slash" onclick="toggleSignUpPwd(this)"></span>
+                    </div>
+                    <div class="element">
+                        <input id="confirm-password" type="password" placeholder="Confirm Password" min="8" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$">
                         <span class="fas fa-lock"></span>
                         <span class="far fa-eye-slash" onclick="toggleSignUpPwd(this)"></span>
                     </div>

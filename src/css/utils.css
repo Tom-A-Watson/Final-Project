@@ -1,0 +1,18 @@
+.container {
+    max-width: 85%;
+    margin: 0 auto;
+    overflow: auto;
+    overflow-x: hidden;
+    padding: 0 28px;
+}
+
+.navbar .flex {
+    justify-content: space-between;
+}
+
+.flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
