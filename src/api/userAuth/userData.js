@@ -74,10 +74,7 @@ class UserData
 			
 			return {error: "Passwords don't match"};
 			
-		}).catch(error =>
-		{
-			return {error: error}
-		})
+		}).catch(error => { return {error: error} })
 	}
 }
 

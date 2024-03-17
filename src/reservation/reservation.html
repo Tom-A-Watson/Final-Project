@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/reservation.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/utils.css">
+    <title>Tom's Trattoria</title>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <header class="navbar">
+        <div class="container flex">
+            <h1>Tom's Trattoria</h1>
+            <!-- <img id="navbar-logo" src="" alt="Site Logo"> -->
+            <nav>
+                <ul>
+                    <li><a id="homebtn" href="../reservation/loggedin.html">Home</a></li>
+                    <li><a id="reservebtn" href="#">Book a Table</a></li>
+                    <li><a id="menubtn" href="">Menu</a></li>
+                    <li><a id="contactbtn" href="">Contact Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <form id="reservation-form">
+        <div class="elem-group">
+          <label for="name">Your Name</label>
+          <input type="text" id="name" name="name" placeholder="Name for the reservation" pattern=[A-Z\sa-z]{3,20} value="Tom" required>
+        </div>
+        <hr>
+        <div class="elem-group inlined">
+          <label>Adults</label>
+          <input type="number" id="adults" name="total_adults" placeholder="Number of adults..." min="1" max="14" value="2" required>
+        </div>
+        <div class="elem-group inlined">
+          <label>Children</label>
+          <input type="number" id="children" name="total_children" placeholder="Number of children..." min="0" value="1" required>
+        </div>
+        <div class="elem-group inlined">
+          <label>Reservation Date</label>
+          <input type="datetime-local" id="datetime" name="reservation_date" value="2024-03-16T20:00" required>
+        </div>
+        <div class="elem-group inlined" >
+          <label>Duration</label>
+          <select id="duration" name="room_preference" required>
+              <option>2 hours</option>
+              <option>2.5 hours</option>
+              <option>3 hours</option>
+          </select>
+        </div>
+        <hr>
+        <button type="submit">Book Now</button>
+    </form>
+    <script src="javascript/reservation.js"></script>
+</body>
+</html>
