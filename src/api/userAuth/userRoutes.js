@@ -67,7 +67,7 @@ class UserRoutes
 				res.json({error: "One or more fields were not filled out"});
 			}
 			
-			let { user, password} = req.body;
+			let { user, password } = req.body;
 			if (utils.isEmpty(user) || utils.isEmpty(password))
 			{
 				res.status(400);

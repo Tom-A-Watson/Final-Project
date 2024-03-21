@@ -1,6 +1,6 @@
 import { dbConnect } from '../config.js';
 
-class ReservationData 
+class ReservationService 
 {
     async reserve(username, tableNumber, name, guestCount, dateTime, duration)
 	{
@@ -8,18 +8,20 @@ class ReservationData
 
 		try
 		{
-			console.log("username="+username);
-			console.log("tableNumber="+tableNumber);
-			console.log("name="+name);
-			console.log("guestCount="+guestCount);
-			console.log("dateTime="+dateTime);
-			console.log("duration="+duration);
+			console.log("username=" + username);
+			console.log("tableNumber=" + tableNumber);
+			console.log("name=" + name);
+			console.log("guestCount=" + guestCount);
+			console.log("dateTime=" + dateTime);
+			console.log("duration=" + duration);
 
 
+			// GAW TODO: Change this to do a lookup/check if a table is available, rather than
+			//           assume one is by INSERTing a reservation.
 			await connection.execute("INSERT INTO reservations (username, tableNumber, name, guestCount, dateTime, duration) VALUES (?, ?, ?, ?, ?, ?)", 
                 [username, tableNumber, name, guestCount, dateTime, 100]);
 			
-            return null; // Reservation is inserted successfully
+            return true; // Reservation is inserted successfully
 		}
 		catch (error)
 		{
@@ -31,4 +33,4 @@ class ReservationData
     
 }
 
-export { ReservationData }
+export { ReservationService }

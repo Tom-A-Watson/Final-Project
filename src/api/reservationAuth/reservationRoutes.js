@@ -1,5 +1,5 @@
 import multer from 'multer';
-import { ReservationData } from './reservationData.js';
+import { ReservationService } from './reservationService.js';
 import { Router } from 'express';
 import { Utils } from '../utils.js';
 
@@ -13,7 +13,7 @@ class ReservationRoutes
      */
     createRoutes(router) 
     {
-        let reservationData = new ReservationData();
+        let reservationService = new ReservationService();
         let upload = multer();
         let utils = new Utils();
         router.post("/reserve/", upload.none(), async function(req, res)
@@ -50,15 +50,17 @@ class ReservationRoutes
             // }
 
             let guestCount = adults + children;
-            let error = await reservationData.reserve("tom", 1, name, guestCount, dateTime, duration);
+            let reservationSuccessful = await reservationService.reserve("tom", 1, name, guestCount, dateTime, duration);
 
-            if (error) 
+            if (!reservationSuccessful) 
             {
-                res.status(500);
-                res.json(error);
+                console.log("GARY HERE1 -------------------------");
+                res.status(400);
+                res.json({error: "The reservation was unsuccessful"});
+                // res.json(reservationSuccessful);
                 return;
             }
-
+ 
             res.sendStatus(200);
         }) 
     }
