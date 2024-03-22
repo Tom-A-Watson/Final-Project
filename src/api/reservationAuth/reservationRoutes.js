@@ -18,7 +18,6 @@ class ReservationRoutes
         let utils = new Utils();
         router.post("/reserve/", upload.none(), async function(req, res)
         {
-            console.log("reservation received -------------------------");
             if (!req.body)
 			{
 				res.status(400)
@@ -26,7 +25,7 @@ class ReservationRoutes
 				return;
 			}
 
-            let { name, adults, children, dateTime, duration } = req.body;
+            let { tableNumber, name, adults, children, dateTime, duration } = req.body;
 			
 			if (utils.isEmpty(name) || utils.isEmpty(children) || utils.isEmpty(dateTime))
 			{
@@ -49,15 +48,13 @@ class ReservationRoutes
             //     return;
             // }
 
-            let guestCount = adults + children;
-            let reservationSuccessful = await reservationService.reserve("tom", 1, name, guestCount, dateTime, duration);
+            let guestCount = parseInt(adults) + parseInt(children);
+            let reservationSuccessful = await reservationService.reserve("tom", tableNumber, name, guestCount, dateTime, duration);
 
             if (!reservationSuccessful) 
             {
-                console.log("GARY HERE1 -------------------------");
                 res.status(400);
                 res.json({error: "The reservation was unsuccessful"});
-                // res.json(reservationSuccessful);
                 return;
             }
  

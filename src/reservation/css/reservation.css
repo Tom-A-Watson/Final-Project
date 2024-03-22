@@ -1,3 +1,8 @@
+:root {
+    --primary-colour: rgb(74, 60, 37);
+    --secondary-colour: rgb(114, 71, 0);
+}
+
 div.elem-group {
     margin: 20px 0;
 }
@@ -11,7 +16,6 @@ div.elem-group.inlined {
 
 label {
     display: block;
-    font-family: 'Nanum Gothic';
     padding-bottom: 10px;
     font-size: 1.25em;
 }
@@ -21,7 +25,6 @@ input, select, textarea {
     border: 2px solid #777;
     box-sizing: border-box;
     font-size: 1.25em;
-    font-family: 'Nanum Gothic';
     width: 100%;
     padding: 10px;
 }
@@ -54,10 +57,29 @@ button:hover {
     border: 2px solid black;
 }
 
+td {
+    padding: 4px 10px;
+    font-size: 18px;
+}
+
 #reservation-form {
     position: relative;
     top: 7em;
     max-width: 500px;
     display: block;
     margin: 0 auto;
+}
+
+#details-container {
+    max-width: fit-content;
+    position: relative;
+    top: 8.5em;
+    left: 9em;
+    padding: 1em 2em;
+    background-color: var(--secondary-colour);
+}
+
+.detail-value {
+    font-family: 'Noto Sans', sans-serif;
+    padding: 0 0 0 2em;
 }
