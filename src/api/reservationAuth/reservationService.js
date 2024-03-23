@@ -19,13 +19,11 @@ class ReservationService
 			// GAW TODO: Change this to do a lookup/check if a table is available, rather than
 			//           assume one is by INSERTing a reservation.
 			let [rows, fields] = await connection.execute(
-				"SELECT * " +
-			    "FROM restaurant_tables rt " +
-				"WHERE rt.tableNumber NOT IN ( " +
-				"SELECT r.tableNumber " +
-				"FROM reservations r " +
-				"WHERE STR_TO_DATE(?, '%Y-%m-%dT%T') BETWEEN r.dateTime AND DATE_ADD(r.dateTime, INTERVAL r.duration MINUTE) " +
-				"OR DATE_ADD(STR_TO_DATE(?, '%Y-%m-%dT%T'), INTERVAL ? MINUTE) BETWEEN r.dateTime AND DATE_ADD(r.dateTime, INTERVAL r.duration MINUTE)) " +
+				"SELECT * FROM restaurant_tables rt " +
+				"WHERE rt.tableNumber NOT IN (SELECT r.tableNumber " +
+											 "FROM reservations r " +
+											 "WHERE STR_TO_DATE(?, '%Y-%m-%dT%T') BETWEEN r.dateTime AND DATE_ADD(r.dateTime, INTERVAL r.duration MINUTE) " +
+											 "OR DATE_ADD(STR_TO_DATE(?, '%Y-%m-%dT%T'), INTERVAL ? MINUTE) BETWEEN r.dateTime AND DATE_ADD(r.dateTime, INTERVAL r.duration MINUTE)) " +
 				"AND rt.seatCount >= ? order by rt.seatCount", 
 				[dateTime, dateTime, 120, guestCount]);
 

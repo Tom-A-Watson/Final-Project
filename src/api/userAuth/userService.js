@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 import { dbConnect } from '../config.js';
 
-class UserData
+class UserService
 {
 	/**
 	 * Checks if username is in table if so return true if not return false
@@ -78,4 +78,4 @@ class UserData
 	}
 }
 
-export { UserData }
+export { UserService }

@@ -41,13 +41,6 @@ class ReservationRoutes
                 return;
             }
 
-            // if (await reservationData.checkDate(dateTime) || await reservationData.checkDuration(duration)) 
-            // {
-            //     res.status(409)
-            //     res.json({error: "The date or time given conflicts with an existing reservation"});
-            //     return;
-            // }
-
             let guestCount = parseInt(adults) + parseInt(children);
             let reservationSuccessful = await reservationService.reserve("tom", tableNumber, name, guestCount, dateTime, duration);
 
@@ -60,6 +53,11 @@ class ReservationRoutes
  
             res.sendStatus(200);
         }) 
+
+        router.get("/admin/", async function(req, res) 
+        {
+            
+        })
     }
 }
 

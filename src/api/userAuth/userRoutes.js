@@ -1,5 +1,5 @@
 import multer from 'multer';
-import { UserData } from './userData.js';
+import { UserService } from './userService.js';
 import { Utils } from "../utils.js"
 
 class UserRoutes
@@ -12,7 +12,7 @@ class UserRoutes
 	 */
 	createRoutes(router)
 	{
-		let userData = new UserData();
+		let userService = new UserService();
 		let upload = multer();
 		let utils = new Utils();
 		router.post("/user/signup", upload.none(), async function (req, res)
@@ -40,7 +40,7 @@ class UserRoutes
 				return;
 			}
 			
-			if (await userData.checkUsername(username) || await userData.checkEmail(email))
+			if (await userService.checkUsername(username) || await userService.checkEmail(email))
 			{
 				res.status(409);
 				res.json({error: "Username or email already exists"})
@@ -75,7 +75,7 @@ class UserRoutes
 				return;
 			}
 			
-			let error = await userData.login(user, password)
+			let error = await userService.login(user, password)
 			
 			if (error)
 			{
@@ -83,7 +83,6 @@ class UserRoutes
 				res.json(error);
 				return;
 			}
-			
 			console.log("Before ------------------------" + user);
 
 			req.session.user = user;

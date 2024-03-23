@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Belanosima&display=swap');
+
 :root {
     --primary-colour: rgb(74, 60, 37);
     --secondary-colour: rgb(114, 71, 0);
@@ -18,6 +22,7 @@ label {
     display: block;
     padding-bottom: 10px;
     font-size: 1.25em;
+    font-family: 'Belanosima', sans-serif;
 }
 
 input, select, textarea {
@@ -34,21 +39,21 @@ div.elem-group.inlined input {
     display: inline-block;
 }
 
-textarea {
-    height: 250px;
-}
-
 hr {
     border: 1px dotted #ccc;
 }
 
 button {
+    position: relative;
+    top: 1em;
     height: 50px;
+    padding: 0 3em;
     background: orange;
+    display: block;
+    margin: 0 auto;
     border: none;
-    color: white;
     font-size: 1.25em;
-    font-family: 'Nanum Gothic';
+    font-family: 'Belanosima', sans-serif;
     border-radius: 4px;
     cursor: pointer;
 }
