@@ -47,7 +47,7 @@ class UserRoutes
 				return;
 			}
 			
-			let error = await userData.insertUser(username, email, password);
+			let error = await userService.insertUser(username, email, password);
 			
 			if (error)
 			{
@@ -97,6 +97,23 @@ class UserRoutes
 			{
 				res.status(403);
 				res.json({error: "You are not logged in, please login to make a reservation"});
+				return;
+			}
+
+			res.sendStatus(200);
+		})
+
+		router.delete("/user/:username", async function(req, res) 
+		{
+			let username = req.params.username;
+			let userDeleted = await userService.deleteUser(username);
+
+			console.log("DELETED USER RESULT:" + JSON.stringify(userDeleted))
+
+			if (!userDeleted) 
+			{
+				res.status(404);
+				res.json({error: "User was not found (they may have already been deleted prior)"});
 				return;
 			}
 

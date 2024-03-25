@@ -1,0 +1,65 @@
+block variables
+doctype html
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    link(rel="preconnect", href="https://fonts.googleapis.com")
+    link(rel="preconnect", href="https://fonts.gstatic.com" crossorigin)
+    link(href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap", rel="stylesheet")
+    link(rel="stylesheet", href="http://localhost/css/styles.css")
+    link(rel="stylesheet", href="http://localhost/css/utils.css")
+    link(rel="stylesheet", href="http://localhost/reservation/css/reservation.css")
+    link(rel="shortcut icon", href="/favicon.ico")
+    title #{title} | 
+  body
+
+    <!-- Navigation -->
+    header.navbar
+        div.container.flex
+            h1 Tom's Trattoria
+            <!-- <img id="navbar-logo" src="" alt="Site Logo"> -->
+            nav
+                ul
+                    li 
+                      a#homebtn(href="loggedin.html") Home
+                    li
+                      a#reservebtn(href="reservation.html") Book a Table
+                    li
+                      a#menubtn(href="") Menu
+                    li
+                      a#contactbtn(href="") Contact Us
+
+    h2 Your reservations:
+    div#details-container
+        table
+            tbody
+                tr
+                  td Name on the reservation:
+                  td.detail-value Tom
+                tr
+                  td Number of guests:
+                  td.detail-value 5
+                tr
+                  td Date:
+                  td.detail-value 21/03/2024
+                tr
+                  td Time:
+                  td.detail-value 19:30pm
+                tr
+                  td Table number:
+                  td.detail-value 7
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Tom's Trattoria</title>
+</head>
+<body>
+
+    
+</body>
+</html>

@@ -40,6 +40,16 @@ function toggleSignUpPwd(e) {
     e.classList.value = (e.classList.value == "far fa-eye") ? "far fa-eye-slash" : "far fa-eye"; 
 }
 
+/**
+ * Toggles the password input type between 'password' and 'text' in the SIGN UP form, allowing the
+ * user to see the characters they entered.
+ * @param {Event} e - The event, which in this case is a click event 
+ */
+function toggleConfirmPwd(e) {
+    document.querySelector("#confirm-password").type = (document.querySelector("#confirm-password").type == "password") ? "text" : "password";
+    e.classList.value = (e.classList.value == "far fa-eye") ? "far fa-eye-slash" : "far fa-eye"; 
+}
+
 document.querySelector("#login-form").addEventListener("submit", e => {
     e.preventDefault();
 

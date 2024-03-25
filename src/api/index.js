@@ -1,13 +1,21 @@
 import express from 'express';
+import { dirname } from 'path';
+import path from 'path'
+import { fileURLToPath } from 'url';
 import session from "express-session";
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import { UserRoutes } from './userAuth/userRoutes.js';
+import { UserService } from './userAuth/userService.js';
 import { ReservationRoutes } from './reservationAuth/reservationRoutes.js';
+import { ReservationService } from './reservationAuth/reservationService.js';
 
+const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express()
 const router = express.Router();
 const port = 3000
+const userService = new UserService();
+const reservationService = new ReservationService();
 
 app.use(cors())
 app.use(cookieParser())
@@ -34,7 +42,19 @@ app.use(function (req, res, next)
 });
 
 app.use('/api', router);
+
 app.listen(port, () =>
 {
-  console.log(`Example app listening on port ${port}`)
+  console.log(`Node app listening on port ${port}`)
+});
+
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "pug");
+
+app.get("/admin", (req, res) => {
+  userService.findAll().then((users) => {
+    reservationService.findAll().then((reservations) => {
+      res.render("admin", { title: "Admin", users: users, reservations: reservations });
+    }); 
+  });
 });

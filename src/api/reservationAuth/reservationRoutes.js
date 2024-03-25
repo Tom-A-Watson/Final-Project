@@ -53,11 +53,6 @@ class ReservationRoutes
  
             res.sendStatus(200);
         }) 
-
-        router.get("/admin/", async function(req, res) 
-        {
-            
-        })
     }
 }
 
