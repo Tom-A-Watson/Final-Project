@@ -3,6 +3,26 @@ import moment from 'moment';
 
 class ReservationService 
 {
+	async findAll() 
+	{
+		let connection = await dbConnect();
+		let [rows, fields] = await connection.execute("SELECT * FROM reservations");
+
+		rows.forEach(row => {
+			row.dateTime = moment(row.dateTime).format("MMMM Do YYYY HH:mm");
+		});
+	
+		return rows;
+	}
+
+	async deleteReservation(id)
+	{
+		let connection = await dbConnect();
+		let [rows, fields] = await connection.execute("DELETE FROM reservations WHERE id=?", [id]);
+
+		console.log("DELETED ROWS:" + JSON.stringify(rows))
+		return (rows.affectedRows > 0);
+	}
 
     async reserve(username, tableNumber, name, guestCount, dateTime, duration)
 	{
@@ -42,18 +62,6 @@ class ReservationService
 			console.error("Error: ", error);
 			return { error: error }; // Return the error
 		}
-	}
-
-    async findAll() 
-	{
-		let connection = await dbConnect();
-		let [rows, fields] = await connection.execute("SELECT * FROM reservations");
-
-		rows.forEach(row => {
-			row.dateTime = moment(row.dateTime).format("MMMM Do YYYY HH:mm");
-		});
-	
-		return rows;
 	}
 }
 

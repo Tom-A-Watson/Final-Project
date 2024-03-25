@@ -60,6 +60,7 @@ html(lang="en")
         table#reservations-table
             thead
                 tr
+                  th ID
                   th User
                   th tableNunber
                   th Name
@@ -70,6 +71,7 @@ html(lang="en")
             tbody
               each reservation in reservations
                 tr
+                  td #{reservation.id}
                   td #{reservation.username}
                   td #{reservation.tableNumber}
                   td #{reservation.name}
@@ -78,7 +80,8 @@ html(lang="en")
                   td #{reservation.duration}
                   td
                     ul
-                      li(href="deleteuser.html") Delete
+                      li
+                        a.delete-reservation(href="", data-reservation=reservation.id) Delete
                       li(href="updateuser.html") Update
     
     script(src="http://localhost/reservation/javascript/admin.js")

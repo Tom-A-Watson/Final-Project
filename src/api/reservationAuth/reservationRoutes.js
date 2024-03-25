@@ -52,7 +52,24 @@ class ReservationRoutes
             }
  
             res.sendStatus(200);
-        }) 
+        })
+
+        router.delete("/reservation/:id", async function(req, res) 
+		{
+			let id = req.params.id;
+			let reservationDeleted = await reservationService.deleteReservation(id);
+
+			console.log("DELETED RESERVATION RESULT:" + JSON.stringify(reservationDeleted))
+
+			if (!reservationDeleted) 
+			{
+				res.status(404);
+				res.json({error: "Reservation was not found (it may have already been deleted prior)"});
+				return;
+			}
+
+			res.sendStatus(200);
+		})
     }
 }
 
