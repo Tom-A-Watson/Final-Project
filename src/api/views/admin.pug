@@ -31,6 +31,8 @@ html(lang="en")
                     li
                       a#contactbtn(href="") Contact Us
 
+    a#create-admin(href="http://localhost/admin/createadmin.html") Create Administrator
+
     <!-- Database tables --> 
     h2 Users:
     div#db-table-container
@@ -83,8 +85,6 @@ html(lang="en")
                       li
                         a.delete-reservation(href="", data-reservation=reservation.id) Delete
                       li 
-                        a(href="updatereservation.html") Update
-    
-    a#create-admin(href="http://localhost/admin/createadmin.html") Create Administrator 
+                        a(href="updatereservation.html") Update 
     
     script(src="http://localhost/reservation/javascript/admin.js")

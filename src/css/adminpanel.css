@@ -5,12 +5,12 @@ h2 {
 
 #create-admin {
     position: relative;
-    top: 6.5em;
+    top: 6em;
     max-width: 15em;
     padding: 1em 1.5em;
     background: orange;
     display: block;
-    margin: 0 auto;
+    margin: 0 auto 2em auto;
     text-align: center;
     font-size: 1.25em;
     font-family: 'Belanosima', sans-serif;
