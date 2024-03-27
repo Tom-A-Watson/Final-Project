@@ -1,0 +1,116 @@
+h2 {
+    left: 0;
+    text-align: center;
+}
+
+#create-admin {
+    position: relative;
+    top: 6.5em;
+    max-width: 15em;
+    padding: 1em 1.5em;
+    background: orange;
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 1.25em;
+    font-family: 'Belanosima', sans-serif;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#db-table-container {
+    margin: 8em 0;
+    margin-bottom: -4em;
+}
+
+#db-table-container table {
+    font-size: 1.2em;
+    color: black;
+    border: white solid 2px;
+    margin: 0 auto;
+}
+
+#db-table-container thead {
+    background-color: rgb(184, 148, 88);
+    font-weight: bold;
+}
+
+#db-table-container tbody {
+    background-color: rgb(255, 230, 200);
+    font-weight: 400;
+    text-align: center;
+}
+
+#db-table-container th, td {
+    padding: 0.2em 0.75em;
+}
+
+div.elem-group {
+    margin: 5px 0 20px 0;
+}
+
+div.elem-group.inlined {
+    width: 49%;
+    display: inline-block;
+    float: left;
+    margin-left: 1%;
+}
+
+label {
+    display: block;
+    padding-bottom: 10px;
+    font-size: 1.25em;
+    font-family: 'Belanosima', sans-serif;
+}
+
+input, select {
+    border-radius: 2px;
+    border: 2px solid #777;
+    box-sizing: border-box;
+    font-size: 1.25em;
+    width: 100%;
+    padding: 10px;
+}
+
+div.elem-group.inlined input {
+    width: 95%;
+    display: inline-block;
+}
+
+hr {
+    border: 1px dotted #ccc;
+}
+
+button {
+    position: relative;
+    top: 1.5em;
+    height: 50px;
+    padding: 0 3em;
+    background: orange;
+    display: block;
+    margin: 0 auto;
+    border: none;
+    font-size: 1.25em;
+    font-family: 'Belanosima', sans-serif;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+td {
+    padding: 4px 10px;
+    font-size: 18px;
+}
+
+#createadmin-form {
+    position: relative;
+    top: 8.5em;
+    max-width: 500px;
+    display: block;
+    margin: 0 auto;
+}
+
+#is-admin {
+    background-color: #ccc;
+} #is-admin:focus {
+    outline: none;
+  }

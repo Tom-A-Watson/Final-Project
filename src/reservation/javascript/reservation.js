@@ -1,6 +1,6 @@
 document.querySelector("#reservation-form").addEventListener("submit", e => {
     e.preventDefault();
-
+	
     let formData = new FormData();
 	formData.append("name", document.querySelector("#name").value)
 	formData.append("adults", document.querySelector("#adults").value)

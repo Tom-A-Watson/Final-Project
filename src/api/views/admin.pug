@@ -10,7 +10,7 @@ html(lang="en")
     link(href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap", rel="stylesheet")
     link(rel="stylesheet", href="http://localhost/css/styles.css")
     link(rel="stylesheet", href="http://localhost/css/utils.css")
-    link(rel="stylesheet", href="http://localhost/reservation/css/adminpanel.css")
+    link(rel="stylesheet", href="http://localhost/css/adminpanel.css")
     link(rel="shortcut icon", href="/favicon.ico")
     title #{title} | Tom's Trattoria
   body
@@ -82,6 +82,9 @@ html(lang="en")
                     ul
                       li
                         a.delete-reservation(href="", data-reservation=reservation.id) Delete
-                      li(href="updateuser.html") Update
+                      li 
+                        a(href="updatereservation.html") Update
+    
+    a#create-admin(href="http://localhost/admin/createadmin.html") Create Administrator 
     
     script(src="http://localhost/reservation/javascript/admin.js")

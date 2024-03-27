@@ -1,7 +1,7 @@
 import multer from 'multer';
 import { ReservationService } from './reservationService.js';
 import { Router } from 'express';
-import { Utils } from '../utils.js';
+import { isEmpty, isUserLoggedIn } from '../utils.js';
 
 class ReservationRoutes 
 {
@@ -15,9 +15,16 @@ class ReservationRoutes
     {
         let reservationService = new ReservationService();
         let upload = multer();
-        let utils = new Utils();
-        router.post("/reserve/", upload.none(), async function(req, res)
+        router.post("/api/reserve/", upload.none(), async function(req, res)
         {
+            if (!isUserLoggedIn(req)) {
+                res.render("loginsignup");
+                return;
+            }
+
+            let user = req.session.user;
+
+
             if (!req.body)
 			{
 				res.status(400)
@@ -27,7 +34,7 @@ class ReservationRoutes
 
             let { tableNumber, name, adults, children, dateTime, duration } = req.body;
 			
-			if (utils.isEmpty(name) || utils.isEmpty(children) || utils.isEmpty(dateTime))
+			if (isEmpty(name) || isEmpty(children) || isEmpty(dateTime))
 			{
 				res.status(400)
 				res.json({error: "One or more fields were not filled out"});
@@ -42,7 +49,7 @@ class ReservationRoutes
             }
 
             let guestCount = parseInt(adults) + parseInt(children);
-            let reservationSuccessful = await reservationService.reserve("tom", tableNumber, name, guestCount, dateTime, duration);
+            let reservationSuccessful = await reservationService.reserve(user, tableNumber, name, guestCount, dateTime, duration);
 
             if (!reservationSuccessful) 
             {
@@ -54,7 +61,7 @@ class ReservationRoutes
             res.sendStatus(200);
         })
 
-        router.delete("/reservation/:id", async function(req, res) 
+        router.delete("/api/reservation/:id", async function(req, res) 
 		{
 			let id = req.params.id;
 			let reservationDeleted = await reservationService.deleteReservation(id);

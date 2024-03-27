@@ -5,6 +5,7 @@ import { fileURLToPath } from 'url';
 import session from "express-session";
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
+import { isUserLoggedIn } from './utils.js';
 import { UserRoutes } from './userAuth/userRoutes.js';
 import { UserService } from './userAuth/userService.js';
 import { ReservationRoutes } from './reservationAuth/reservationRoutes.js';
@@ -23,7 +24,7 @@ app.use(cookieParser())
 app.use(session({
   secret: "z;t7T6dxV~*p/AXX4duv7q9)c",
   resave: false,
-  saveUninitialized:  true
+  saveUninitialized: true
 }));
 
 let userRoutes = new UserRoutes();
@@ -41,7 +42,7 @@ app.use(function (req, res, next)
   next();
 });
 
-app.use('/api', router);
+app.use('/', router);
 
 app.listen(port, () =>
 {
@@ -58,3 +59,12 @@ app.get("/admin", (req, res) => {
     }); 
   });
 });
+
+app.get("/reservation", (req, res) => {
+  if ( !isUserLoggedIn(req)  ) {
+    res.render("loginsignup");
+    return;
+  }
+
+  res.render("reservation")
+}); 

@@ -97,9 +97,31 @@ class UserService
 				return null;
 			}
 			
-			return {error: "Passwords don't match"};
+			return {error: "Username or password is incorrect"};
 			
 		}).catch(error => { return {error: error} })
+	}
+
+	async insertAdmin(username, email, password, isAdmin)
+	{
+		let connection = await dbConnect(); // Establish connection
+		const hash = await bcrypt.hash(password, 10); // Hash password
+		isAdmin = 1; 
+		
+		try
+		{
+			console.log("username =" + username);
+			console.log("email =" + email);
+			console.log("password =" + hash);
+
+			await connection.execute("INSERT INTO users (username, email, password, isAdmin) VALUES (?, ?, ?, ?)", [username, email, hash, isAdmin]);
+			return null; // Admin is inserted successfully
+		}
+		catch (error)
+		{
+			console.error("Error:", error);
+			return { error: error }; // Return the error
+		}
 	}
 }
 

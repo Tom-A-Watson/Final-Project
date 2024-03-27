@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script src="https://kit.fontawesome.com/b94f75224e.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="http://localhost/reservation/css/loginsignup.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tom's Trattoria | Login & Sign Up</title>
+</head>
+<body>
+    <a href="index.html">
+        <img id="logo" src="../ImgSrc/logo.png" alt="Tom's Trattoria Logo" width="120">
+    </a>
+    <div class="container">
+        <div class="switch">
+            <div class="login" onclick="scrollToLogin();">Login</div>
+            <div class="signup" onclick="scrollToSignUp();">Sign Up</div>
+        </div>
+
+        <div class="outer">
+            <div id="form">
+                <form id="login-form" class="page">
+                    <h3>Login to Tom's Trattoria</h3>
+                    <label id="login-error" class="errorMessage"></label>
+                    <div class="element">
+                        <input id="login-username" type="text" placeholder="Username">
+                        <span class="fas fa-user"></span>
+                    </div>
+                    <div class="element">
+                        <input id="login-password" type="password" placeholder="Password">
+                        <span class="fas fa-lock"></span>
+                        <span class="far fa-eye-slash" onclick="toggleLoginPwd(this)"></span>
+                    </div>
+                    <input id="login-btn" type="submit" class="btn" value="Log in">
+                </form>
+
+                <form id="signup-form" class="page">
+                    <h3>Sign up to Tom's Trattoria</h3>
+                    <label id="signup-error" class="errorMessage"></label>
+                    <div class="element">
+                        <input id="signup-email" type="email" placeholder="Enter Email Address">
+                        <span class="fas fa-envelope"></span>
+                        <span id="email-msg"></span>
+                    </div>
+                    <div class="element">
+                        <input id="signup-username" type="text" placeholder="Create Username" min="3" max="20" pattern="[a-zA-Z0-9.-_]*[a-zA-Z0-9]">
+                        <span class="fas fa-user"></span>
+                    </div>
+                    <div class="element">
+                        <input id="signup-password" type="password" placeholder="Create Password" min="8" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$">
+                        <span class="fas fa-lock"></span>
+                        <span class="far fa-eye-slash" onclick="toggleSignUpPwd(this)"></span>
+                    </div>
+                    <div class="element">
+                        <input id="confirm-password" type="password" placeholder="Confirm Password" min="8" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$">
+                        <span class="fas fa-lock"></span>
+                        <span class="far fa-eye-slash" onclick="toggleConfirmPwd(this)"></span>
+                    </div>
+                    <input id="signup-btn" type="submit" class="btn" value="Sign up">
+                </form>
+            </div>
+        </div>
+    </div>
+    script(src="http://localhost/reservation/javascript/loginsignup.js")
+</body>
+</html>
