@@ -1,28 +1,25 @@
 import multer from 'multer';
-import { UserData } from './userData.js';
+import { UserService } from './userService.js';
 import { Utils } from "../utils.js"
 
 class UserRoutes
 {
-	constructor()
-	{
-
-	}
+	constructor() {}
 	
 	/**
-	 * Create Routes for all User stuff like login and signUp
+	 * Create routes for all user stuff like login and signUp
 	 * @param {Router} router
 	 */
 	createRoutes(router)
 	{
-		let userData = new UserData();
+		let userService = new UserService();
 		let upload = multer();
 		let utils = new Utils();
 		router.post("/user/signup", upload.none(), async function (req, res)
 		{
 			if (!req.body)
 			{
-				res.status(400)
+				res.status(400);
 				res.json({error: "One or more fields were not filled out"});
 				return;
 			}
@@ -31,19 +28,19 @@ class UserRoutes
 			
 			if (utils.isEmpty(username) || utils.isEmpty(email) || utils.isEmpty(password) || utils.isEmpty(confirmPass))
 			{
-				res.status(400)
+				res.status(400);
 				res.json({error: "One or more fields were not filled out"});
 				return;
 			}
 			
 			if (password !== confirmPass)
 			{
-				res.status(400)
+				res.status(400);
 				res.json({error: "Passwords don't match"});
 				return;
 			}
 			
-			if (await userData.checkUsername(username) || await userData.checkEmail(email))
+			if (await userService.checkUsername(username) || await userService.checkEmail(email))
 			{
 				res.status(409);
 				res.json({error: "Username or email already exists"})
@@ -67,18 +64,18 @@ class UserRoutes
 			if (!req.body)
 			{
 				res.status(400);
-				res.json({error: "Not all data filled out"});
+				res.json({error: "One or more fields were not filled out"});
 			}
 			
-			let { user, password} = req.body;
+			let { user, password } = req.body;
 			if (utils.isEmpty(user) || utils.isEmpty(password))
 			{
 				res.status(400);
-				res.json({error: "Not all data filled out"});
+				res.json({error: "One or more fields were ont filled out"});
 				return;
 			}
 			
-			let error = await userData.login(user, password)
+			let error = await userService.login(user, password)
 			
 			if (error)
 			{
@@ -86,8 +83,23 @@ class UserRoutes
 				res.json(error);
 				return;
 			}
-			
+			console.log("Before ------------------------" + user);
+
 			req.session.user = user;
+			console.log("HEREE ------------------------" + req.session.user );
+			res.sendStatus(200);
+		})
+	
+		router.get("/user/isloggedin", async function (req, res) 
+		{	
+			console.log("HEREE ------------------------" + req.session.user);
+			if (req.session.user == null)
+			{
+				res.status(403);
+				res.json({error: "You are not logged in, please login to make a reservation"});
+				return;
+			}
+
 			res.sendStatus(200);
 		})
 	}

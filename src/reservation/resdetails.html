@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/utils.css">
+    <link rel="stylesheet" href="css/reservation.css">
     <title>Tom's Trattoria</title>
 </head>
 <body>
@@ -20,7 +21,7 @@
             <!-- <img id="navbar-logo" src="" alt="Site Logo"> -->
             <nav>
                 <ul>
-                    <li><a id="homebtn" href="#">Home</a></li>
+                    <li><a id="homebtn" href="loggedin.html">Home</a></li>
                     <li><a id="reservebtn" href="reservation.html">Book a Table</a></li>
                     <li><a id="menubtn" href="">Menu</a></li>
                     <li><a id="contactbtn" href="">Contact Us</a></li>
@@ -29,7 +30,33 @@
         </div>
     </header>
 
-
+    <h2>Your reservations:</h2>
+    <div id="details-container">
+        <table>
+            <tbody>
+                <tr>
+                    <td>Name on the reservation:</td>
+                    <td class="detail-value">Tom</td>
+                </tr>
+                <tr>
+                    <td>Number of guests:</td>
+                    <td class="detail-value">5</td>
+                </tr>
+                <tr>
+                    <td>Date:</td>
+                    <td class="detail-value">21/03/2024</td>
+                </tr>
+                <tr>
+                    <td>Time:</td>
+                    <td class="detail-value">19:30pm</td>
+                </tr>
+                <tr>
+                    <td>Table number:</td>
+                    <td class="detail-value">7</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
     
 </body>
 </html>

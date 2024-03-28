@@ -25,17 +25,11 @@ body {
     background-color: var(--primary-colour);
 }
 
-section {
-    padding: 2em 0;
-    min-height: 100vh;
-    background-color: var(--primary-colour);
-    margin: 0 0 2em 0;
-}
-
 h2 {
     position: relative;
-    top: 3.75rem;
-    font-size: 36px;
+    top: 4.5em;
+    left: 6em;
+    font-size: 24px;
     line-height: 1.2;
 }
 

@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Belanosima&display=swap');
+
+:root {
+    --primary-colour: rgb(74, 60, 37);
+    --secondary-colour: rgb(114, 71, 0);
+}
+
+div.elem-group {
+    margin: 20px 0;
+}
+
+div.elem-group.inlined {
+    width: 49%;
+    display: inline-block;
+    float: left;
+    margin-left: 1%;
+}
+
+label {
+    display: block;
+    padding-bottom: 10px;
+    font-size: 1.25em;
+    font-family: 'Belanosima', sans-serif;
+}
+
+input, select, textarea {
+    border-radius: 2px;
+    border: 2px solid #777;
+    box-sizing: border-box;
+    font-size: 1.25em;
+    width: 100%;
+    padding: 10px;
+}
+
+div.elem-group.inlined input {
+    width: 95%;
+    display: inline-block;
+}
+
+hr {
+    border: 1px dotted #ccc;
+}
+
+button {
+    position: relative;
+    top: 1em;
+    height: 50px;
+    padding: 0 3em;
+    background: orange;
+    display: block;
+    margin: 0 auto;
+    border: none;
+    font-size: 1.25em;
+    font-family: 'Belanosima', sans-serif;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    border: 2px solid black;
+}
+
+td {
+    padding: 4px 10px;
+    font-size: 18px;
+}
+
+#reservation-form {
+    position: relative;
+    top: 7em;
+    max-width: 500px;
+    display: block;
+    margin: 0 auto;
+}
+
+#details-container {
+    max-width: fit-content;
+    position: relative;
+    top: 8.5em;
+    left: 9em;
+    padding: 1em 2em;
+    background-color: var(--secondary-colour);
+}
+
+.detail-value {
+    font-family: 'Noto Sans', sans-serif;
+    padding: 0 0 0 2em;
+}
