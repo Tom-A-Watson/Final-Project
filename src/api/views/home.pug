@@ -9,7 +9,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="http://localhost/css/styles.css">
     <link rel="stylesheet" href="http://localhost/css/utils.css">
-    <link rel="stylesheet" href="http://localhost/css/adminpanel.css">
     <title>Tom's Trattoria</title>
 </head>
 <body>
@@ -22,7 +21,8 @@
             <nav>
                 <ul>
                     <li><a id="homebtn" href="http://localhost">Home</a></li>
-                    <li><a id="reservebtn" href="reservation.html">Book a Table</a></li>
+                    <li><a id="loginsignupbtn" href="http://localhost:3000/api/user/loginsignup">Log in/ Sign up</a></li>
+                    <li><a id="reservebtn" href="http://localhost:3000/reservation">Book a Table</a></li>
                     <li><a id="menubtn" href="">Menu</a></li>
                     <li><a id="contactbtn" href="">Contact Us</a></li>
                     <li><a id="logoutbtn" href="/user/logout">Log out</a></li>
@@ -31,29 +31,6 @@
         </div>
     </header>
 
-    <h2>Create an administrative user</h2>
-    <form id="createadmin-form">
-      <hr>
-        <div class="elem-group">
-          <label for="username">Username</label>
-          <input type="text" id="admin-username" name="admin_username" pattern="[a-zA-Z0-9.-_]*[a-zA-Z0-9]" value="Admin123" required>
-        </div>
-        <div class="elem-group">
-          <label>Email</label>
-          <input type="email" id="admin-email" name="admin_email" value="admin123@tomstrattoria.co.uk" required>
-        </div>
-        <div class="elem-group inlined">
-          <label>Password</label>
-          <input type="password" id="admin-password" name="admin_password" value="CoolGuy13!" required>
-        </div>
-        <div class="elem-group inlined">
-          <label>Admin</label>
-          <input type="text" id="is-admin" name="is_admin" value="True" readonly>
-        </div>
-      <hr>
-        <p id="messages"></p>
-        <button type="submit">Create</button>
-    </form>
-  <script src="http://localhost/reservation/javascript/admin.js"></script>
+    
 </body>
 </html>

@@ -1,6 +1,6 @@
 import multer from 'multer';
 import { UserService } from './userService.js';
-import { isEmpty } from "../utils.js"
+import { isEmpty, logUserOut } from "../utils.js"
 
 class UserRoutes
 {
@@ -14,6 +14,7 @@ class UserRoutes
 	{
 		let userService = new UserService();
 		let upload = multer();
+
 		router.post("/api/user/signup", upload.none(), async function (req, res)
 		{
 			if (!req.body)
@@ -92,14 +93,7 @@ class UserRoutes
 		router.get("/api/user/loginsignup", async function (req, res) 
 		{	
 			res.render("loginsignup");
-		}) 
-
-
-		router.get("/api/user/logmein", async function (req, res) 
-		{	
-			req.session.user="pleb";
-			res.sendStatus(200);
-		}) 
+		})
 
 		router.get("/api/user/isloggedin", async function (req, res) 
 		{	
@@ -112,7 +106,21 @@ class UserRoutes
 			}
 
 			res.sendStatus(200);
-		}) 
+		})
+		
+		router.get("/user/logout", async function(req, res)
+		{
+			let loggedIn = logUserOut(req);
+
+			if (!loggedIn) 
+			{
+				res.status(400);
+				res.json({error: "You are not logged in!"});
+				return;
+			}
+
+			res.redirect("/");
+		})
 
 		router.post("/api/admin/createadmin", upload.none(), async function(req, res) 
 		{
