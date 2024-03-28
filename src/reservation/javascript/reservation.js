@@ -1,8 +1,6 @@
 document.querySelector("#reservation-form").addEventListener("submit", e => {
     e.preventDefault();
-
-    console.log("HERE -------------2-2-2-2-22--")
-
+	
     let formData = new FormData();
 	formData.append("name", document.querySelector("#name").value)
 	formData.append("adults", document.querySelector("#adults").value)
@@ -15,7 +13,6 @@ document.querySelector("#reservation-form").addEventListener("submit", e => {
 		body: formData
 	}).then(res =>
 	{
-		console.log("response = " + res.status)
 		if (!res.ok)
 		{
 			// alert("Reservation was unsuccessful");

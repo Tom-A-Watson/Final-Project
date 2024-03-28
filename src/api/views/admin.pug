@@ -1,0 +1,90 @@
+block variables
+doctype html
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    link(rel="preconnect", href="https://fonts.googleapis.com")
+    link(rel="preconnect", href="https://fonts.gstatic.com" crossorigin)
+    link(href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap", rel="stylesheet")
+    link(rel="stylesheet", href="http://localhost/css/styles.css")
+    link(rel="stylesheet", href="http://localhost/css/utils.css")
+    link(rel="stylesheet", href="http://localhost/css/adminpanel.css")
+    link(rel="shortcut icon", href="/favicon.ico")
+    title #{title} | Tom's Trattoria
+  body
+
+    <!-- Navigation -->
+    header.navbar
+        div.container.flex
+            h1 Tom's Trattoria
+            <!-- <img id="navbar-logo" src="" alt="Site Logo"> -->
+            nav
+                ul
+                    li
+                      a#homebtn(href="loggedin.html") Home
+                    li
+                      a#reservebtn(href="reservation.html") Book a Table
+                    li
+                      a#menubtn(href="") Menu
+                    li
+                      a#contactbtn(href="") Contact Us
+
+    a#create-admin(href="http://localhost/admin/createadmin.html") Create Administrator
+
+    <!-- Database tables --> 
+    h2 Users:
+    div#db-table-container
+        table#users-table
+            thead
+                tr
+                  th Username
+                  th Email
+                  th isAdmin
+                  th isVerified
+                  th Action
+            tbody
+              each user in users
+                tr
+                  td #{user.username}
+                  td #{user.email}
+                  td #{user.isAdmin}
+                  td #{user.isVerified}
+                  td
+                    ul
+                      li
+                        a.delete-user(href="", data-username=user.username) Delete
+                      li(href="updateuser.html") Update
+
+    h2 Reservations:
+    div#db-table-container
+        table#reservations-table
+            thead
+                tr
+                  th ID
+                  th User
+                  th tableNunber
+                  th Name
+                  th Date & Time
+                  th Guests
+                  th Duration
+                  th Action
+            tbody
+              each reservation in reservations
+                tr
+                  td #{reservation.id}
+                  td #{reservation.username}
+                  td #{reservation.tableNumber}
+                  td #{reservation.name}
+                  td #{reservation.dateTime}
+                  td #{reservation.guestCount}
+                  td #{reservation.duration}
+                  td
+                    ul
+                      li
+                        a.delete-reservation(href="", data-reservation=reservation.id) Delete
+                      li 
+                        a(href="updatereservation.html") Update 
+    
+    script(src="http://localhost/reservation/javascript/admin.js")

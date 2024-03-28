@@ -1,14 +1,18 @@
-class Utils
+
+/**
+ * Checks whether string is empty
+ * @param {string} str
+ * @returns {boolean}
+ */
+function isEmpty(str)
 {
-    /**
-     * Checks whether string is empty
-     * @param {string} str
-     * @returns {boolean}
-     */
-    isEmpty(str)
-    {
-        return typeof str === "string" && str.length === 0;
-    }
+    return typeof str === "string" && str.length === 0;
 }
 
-export { Utils }
+function isUserLoggedIn(req) {
+    let userLoggedIn = req.session.user != null;
+    console.log("Util::isUserLoggedIn = " + userLoggedIn)
+    return req.session.user != null;
+}
+
+export { isEmpty, isUserLoggedIn }
