@@ -52,6 +52,10 @@ app.listen(port, () =>
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
 
+app.get("/", (req, res) => {
+    res.render("home");
+}); 
+
 app.get("/admin", (req, res) => {
   userService.findAll().then((users) => {
     reservationService.findAll().then((reservations) => {
