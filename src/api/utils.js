@@ -11,8 +11,12 @@ function isEmpty(str)
 function isUserLoggedIn(req) 
 {
     let userLoggedIn = req.session.user != null;
-    console.log("Util::isUserLoggedIn = " + userLoggedIn)
     return req.session.user != null;
+}
+
+function isAdminUserLoggedIn(req) 
+{
+    return isUserLoggedIn(req) && req.session.user.isAdmin ;
 }
 
 function logUserOut(req) {
@@ -25,4 +29,4 @@ function logUserOut(req) {
     return false;
 }
 
-export { isEmpty, isUserLoggedIn, logUserOut }
+export { isEmpty, isUserLoggedIn, isAdminUserLoggedIn, logUserOut }

@@ -16,22 +16,7 @@ html(lang="en")
   body
 
     <!-- Navigation -->
-    header.navbar
-        div.container.flex
-            h1 Tom's Trattoria
-            <!-- <img id="navbar-logo" src="" alt="Site Logo"> -->
-            nav
-                ul
-                    li 
-                      a#homebtn(href="loggedin.html") Home
-                    li
-                      a#reservebtn(href="reservation.html") Book a Table
-                    li
-                      a#menubtn(href="") Menu
-                    li
-                      a#contactbtn(href="") Contact Us
-                    li
-                      a#logoutbtn(href="/user/logout") Log out  
+    include includes/navbar.pug
 
     h2 Your reservations:
     div#details-container

@@ -89,15 +89,21 @@ class UserService
 			return {error: "User does not exist, please sign up."}
 		}
 		
-		let [rows, fields] = await connection.execute("SELECT password FROM users WHERE username=? or email=?", [user, user]);
+		let [rows, fields] = await connection.execute("SELECT * FROM users WHERE username=? or email=?", [user, user]);
 		return await bcrypt.compare(password, rows[0].password).then(result =>
 		{
 			if (result)
 			{
-				return null;
+				return {
+					loginSuccessful: true, 
+					user: rows[0]
+				};
 			}
 			
-			return {error: "Username or password is incorrect"};
+			return {
+				loginSuccessful: false,
+				error: "Username or password is incorrect"
+			};
 			
 		}).catch(error => { return {error: error} })
 	}
