@@ -5,7 +5,7 @@ import { fileURLToPath } from 'url';
 import session from "express-session";
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
-import { isUserLoggedIn } from './utils.js';
+import { isUserLoggedIn, isAdminUserLoggedIn } from './utils.js';
 import { UserRoutes } from './userAuth/userRoutes.js';
 import { UserService } from './userAuth/userService.js';
 import { ReservationRoutes } from './reservationAuth/reservationRoutes.js';
@@ -27,10 +27,10 @@ app.use(session({
   saveUninitialized: true
 }));
 
-let userRoutes = new UserRoutes();
+const userRoutes = new UserRoutes();
 userRoutes.createRoutes(router);
 
-let reservationRoutes = new ReservationRoutes();
+const reservationRoutes = new ReservationRoutes();
 reservationRoutes.createRoutes(router);
 
 app.use(function (req, res, next)
@@ -41,6 +41,32 @@ app.use(function (req, res, next)
   }
   next();
 });
+
+let userAuthUrls = [ "/reservation", "/user/myprofile", "/api/reserve" ];
+let adminUserUrls = [ "/admin" ];
+
+app.use('/', function (req, res, next) {
+  let isAdminUrl = adminUserUrls.find(url => req.url.startsWith(url));
+  if ( isAdminUrl && !isAdminUserLoggedIn(req) ) {
+    res.redirect("/user/loginsignup");
+    return;
+  }
+
+  next()
+});
+
+app.use('/', function (req, res, next) {
+  let isUserAuthUrl = userAuthUrls.find(url => req.url.startsWith(url));
+  if ( isUserAuthUrl && !isUserLoggedIn(req) ) {
+    res.redirect("/user/loginsignup");
+    return;
+  }
+
+  next()
+});
+
+
+
 
 app.use('/', router);
 
@@ -54,22 +80,17 @@ app.set("view engine", "pug");
 app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/", (req, res) => {
-    res.render("home");
+    res.render("home", { title: "Home", isUserLoggedIn, req });
 }); 
 
 app.get("/admin", (req, res) => {
   userService.findAll().then((users) => {
     reservationService.findAll().then((reservations) => {
-      res.render("admin", { title: "Admin", users: users, reservations: reservations });
+      res.render("admin", { title: "Admin", isUserLoggedIn, req, users: users, reservations: reservations });
     }); 
   });
 });
 
 app.get("/reservation", (req, res) => {
-  if ( !isUserLoggedIn(req)  ) {
-    res.render("loginsignup");
-    return;
-  }
-
-  res.render("reservation")
+  res.render("reservation", { title: "Book a Table", isUserLoggedIn, req })
 }); 

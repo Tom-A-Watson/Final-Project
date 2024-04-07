@@ -75,22 +75,22 @@ class UserRoutes
 				return;
 			}
 			
-			let error = await userService.login(user, password)
+			let loginResult = await userService.login(user, password)
 			
-			if (error)
+			if ( !loginResult.loginSuccessful )
 			{
 				res.status(500)
-				res.json(error);
+				res.json(loginResult);
 				return;
 			}
 			console.log("Before ------------------------" + user);
 
-			req.session.user = user;
-			console.log("HEREE ------------------------" + req.session.user );
+			req.session.user = loginResult.user;
+			console.log("HEREE ------------------------" + JSON.stringify(req.session.user) );
 			res.sendStatus(200);
 		})
 
-		router.get("/api/user/loginsignup", async function (req, res) 
+		router.get("/user/loginsignup", async function (req, res) 
 		{	
 			res.render("loginsignup");
 		})

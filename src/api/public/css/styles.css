@@ -25,6 +25,10 @@ body {
     background-color: var(--primary-colour);
 }
 
+#title {
+    font-size: 1.4em;
+}
+
 h2 {
     position: relative;
     top: 4.5em;

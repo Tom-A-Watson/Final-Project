@@ -10,26 +10,12 @@
     <link rel="stylesheet" href="/css/reservation.css">
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="/css/utils.css">
-    <title>Tom's Trattoria</title>
+    title #{title} | Tom's Trattoria
 </head>
 <body>
 
     <!-- Navigation -->
-    <header class="navbar">
-        <div class="container flex">
-            <h1>Tom's Trattoria</h1>
-            <!-- <img id="navbar-logo" src="" alt="Site Logo"> -->
-            <nav>
-                <ul>
-                    <li><a id="homebtn" href="/">Home</a></li>
-                    <li><a id="reservebtn" href="#">Book a Table</a></li>
-                    <li><a id="menubtn" href="">Menu</a></li>
-                    <li><a id="contactbtn" href="">Contact Us</a></li>
-                    <li><a id="logoutbtn" href="/user/logout">Log out</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+    include includes/navbar.pug
 
     <form id="reservation-form">
         <div class="elem-group">

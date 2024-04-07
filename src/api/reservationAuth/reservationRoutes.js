@@ -1,7 +1,7 @@
 import multer from 'multer';
 import { ReservationService } from './reservationService.js';
 import { Router } from 'express';
-import { isEmpty, isUserLoggedIn } from '../utils.js';
+import { isEmpty } from '../utils.js';
 
 class ReservationRoutes 
 {
@@ -17,13 +17,7 @@ class ReservationRoutes
         let upload = multer();
         router.post("/api/reserve/", upload.none(), async function(req, res)
         {
-            if (!isUserLoggedIn(req)) {
-                res.render("loginsignup");
-                return;
-            }
-
-            let user = req.session.user;
-
+            let username = req.session.user.username;
 
             if (!req.body)
 			{
@@ -49,7 +43,7 @@ class ReservationRoutes
             }
 
             let guestCount = parseInt(adults) + parseInt(children);
-            let reservationSuccessful = await reservationService.reserve(user, tableNumber, name, guestCount, dateTime, duration);
+            let reservationSuccessful = await reservationService.reserve(username, tableNumber, name, guestCount, dateTime, duration);
 
             if (!reservationSuccessful) 
             {
