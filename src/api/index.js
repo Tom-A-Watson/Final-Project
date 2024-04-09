@@ -42,7 +42,7 @@ app.use(function (req, res, next)
   next();
 });
 
-let userAuthUrls = [ "/reservation", "/user/myprofile", "/api/reserve" ];
+let userAuthUrls = [ "/reservation", "/user/profile", "/api/reserve" ];
 let adminUserUrls = [ "/admin" ];
 
 app.use('/', function (req, res, next) {
@@ -65,9 +65,6 @@ app.use('/', function (req, res, next) {
   next()
 });
 
-
-
-
 app.use('/', router);
 
 app.listen(port, () =>
@@ -82,6 +79,12 @@ app.use(express.static(path.join(__dirname, "public")));
 app.get("/", (req, res) => {
     res.render("home", { title: "Home", isUserLoggedIn, req });
 }); 
+
+app.get("/user/profile", (req, res) => {
+  userService.findReservations(req.session.user.username).then((reservations) => {
+    res.render("profile", { title: "My Profile", isUserLoggedIn, req, thisUsersReservations: reservations } )
+  });
+});
 
 app.get("/admin", (req, res) => {
   userService.findAll().then((users) => {

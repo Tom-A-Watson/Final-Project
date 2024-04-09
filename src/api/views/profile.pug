@@ -1,0 +1,48 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    link(rel="preconnect", href="https://fonts.googleapis.com")
+    link(rel="preconnect", href="https://fonts.gstatic.com" crossorigin)
+    link(href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap", rel="stylesheet")
+    link(rel="stylesheet", href="/css/styles.css")
+    link(rel="stylesheet", href="/css/utils.css")
+    link(rel="stylesheet", href="/css/reservation.css")
+    link(rel="stylesheet", href="/css/profilecards.css")
+    link(rel="shortcut icon", href="/favicon.ico")
+    title #{title} | Tom's Trattoria
+  body
+
+    <!-- Navigation -->
+    include includes/navbar.pug
+
+    <!-- User's reservations -->
+    h3 Your reservation(s):
+    each reservation, index in thisUsersReservations
+      -var resCount = index + 1
+      div.card.back
+        div.yellow
+        div.top.dots
+        div.personal-info
+          table
+            thead
+              tr 
+                p= 'Reservation ' + resCount
+                p #{reservation.dateTime}
+            tbody
+              tr
+                td Name:
+                td #{reservation.name}
+              tr
+                td Number of Guests: 
+                td #{reservation.guestCount}
+              tr
+                td Table Number:
+                td #{reservation.tableNumber}
+              tr 
+                td Duration:
+                td 2 Hours
+        div.bottom.dots
+        div.pink

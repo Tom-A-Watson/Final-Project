@@ -1,5 +1,6 @@
 import bcrypt from 'bcrypt';
 import { dbConnect } from '../config.js';
+import moment from 'moment';
 
 class UserService
 {
@@ -11,12 +12,16 @@ class UserService
 		return rows;
 	}
 
-	async findUser(username) 
+	async findReservations(username) 
 	{
 		let connection = await dbConnect();
-		let [rows, fields] = await connection.execute("SELECT * FROM users WHERE usernamne=?", [username]);
+		let [rows, fields] = await connection.execute("SELECT * FROM reservations WHERE username=?", [username]);
 
-		return (rows.length > 0) ? rows[0] : null;
+		rows.forEach(row => {
+			row.dateTime = moment(row.dateTime).format("MMMM Do YYYY [at] HH:mma");
+		});
+
+		return (rows.length > 0) ? rows : [];
 	}
 
 	async deleteUser(username)

@@ -1,6 +1,7 @@
 import multer from 'multer';
 import { UserService } from './userService.js';
 import { isEmpty, logUserOut } from "../utils.js"
+import { Router } from 'express';
 
 class UserRoutes
 {
@@ -120,6 +121,14 @@ class UserRoutes
 			}
 
 			res.redirect("/");
+		})
+
+		router.get("user/profile", async function(req, res)
+		{
+			let username = req.params.username
+			let reservationDetails = await userService.findReservations(username);
+
+			res.render("profile", reservationDetails);
 		})
 
 		router.post("/api/admin/createadmin", upload.none(), async function(req, res) 

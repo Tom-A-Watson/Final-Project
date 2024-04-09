@@ -1,0 +1,71 @@
+.card {
+  background-color: rgb(52, 41, 24);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  display: grid;
+  font-family: 'Trebuchet MS', sans-serif;
+  margin: 2em auto;
+  max-width: 450px;
+}
+.back {
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(12, 1fr);
+}
+.back .yellow {
+  background-color: #f1ef1c;
+  grid-column: 1 / span 9;
+  grid-row: 1 / span 3;
+}
+.back .top.dots {
+  background: radial-gradient(#4cc9c8 20%, transparent 19%), radial-gradient(#4cc9c8 20%, transparent 19%), transparent;
+  background-size: 6px 6px;
+  background-position: 0 0, 3px 3px;
+  grid-column: 8 / span 6;
+  grid-row: 2 / span 3;
+}
+.back .personal-info {
+  position: relative;
+  right: 1em;
+  bottom: 0.75em;
+  margin: 0 0 -0.75em 0;
+  grid-column: 2 / span 6;
+  grid-row: 5 / span 6;
+}
+.back .personal-info table {
+  border-collapse: collapse;
+}
+.back .personal-info p:nth-child(1) {
+  font-size: 1.75em;
+}
+.back .personal-info p:nth-child(2) {
+  margin: 0 0 6px 0;
+  width: max-content;
+}
+.back .personal-info td {
+  font-size: 10px;
+}
+.back .personal-info td:first-of-type {
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-align: left;
+  text-transform: uppercase;
+}
+.back .personal-info td:nth-of-type(2) {
+  font-size: 12px;
+  margin-bottom: 15px;
+  text-align: right;
+}
+.back .bottom.dots {
+  background: radial-gradient(#4cc9c8 20%, transparent 19%), radial-gradient(#4cc9c8 20%, transparent 19%), transparent;
+  background-size: 6px 6px;
+  background-position: 0 0, 3px 3px;
+  margin: 10px 0 0 0;
+  grid-column: 1 / span 8;
+  grid-row: 11 / span 2;
+  z-index: 2;
+}
+.back .pink {
+  background-color: #fa001a;
+  grid-column: 8 / span 5;
+  grid-row: 10 / span 3;
+}
