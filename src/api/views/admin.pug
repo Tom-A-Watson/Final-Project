@@ -1,4 +1,3 @@
-block variables
 doctype html
 html(lang="en")
   head
@@ -8,9 +7,9 @@ html(lang="en")
     link(rel="preconnect", href="https://fonts.googleapis.com")
     link(rel="preconnect", href="https://fonts.gstatic.com" crossorigin)
     link(href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap", rel="stylesheet")
-    link(rel="stylesheet", href="http://localhost/css/styles.css")
-    link(rel="stylesheet", href="http://localhost/css/utils.css")
-    link(rel="stylesheet", href="http://localhost/css/adminpanel.css")
+    link(rel="stylesheet", href="/css/styles.css")
+    link(rel="stylesheet", href="/css/utils.css")
+    link(rel="stylesheet", href="/css/adminpanel.css")
     link(rel="shortcut icon", href="/favicon.ico")
     title #{title} | Tom's Trattoria
   body
@@ -22,7 +21,7 @@ html(lang="en")
 
     <!-- Database tables --> 
     h2 Users:
-    div#db-table-container
+    div.db-table-container
         table#users-table
             thead
                 tr
@@ -45,13 +44,13 @@ html(lang="en")
                       li(href="updateuser.html") Update
 
     h2 Reservations:
-    div#db-table-container
+    div.db-table-container
         table#reservations-table
             thead
                 tr
                   th ID
                   th User
-                  th tableNunber
+                  th Table No.
                   th Name
                   th Date & Time
                   th Guests

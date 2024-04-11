@@ -18,30 +18,30 @@ h2 {
     cursor: pointer;
 }
 
-#db-table-container {
+.db-table-container {
     margin: 8em 0;
     margin-bottom: -4em;
 }
 
-#db-table-container table {
+.db-table-container table {
     font-size: 1.2em;
     color: black;
     border: white solid 2px;
     margin: 0 auto;
 }
 
-#db-table-container thead {
+.db-table-container thead {
     background-color: rgb(184, 148, 88);
     font-weight: bold;
 }
 
-#db-table-container tbody {
+.db-table-container tbody {
     background-color: rgb(255, 230, 200);
     font-weight: 400;
     text-align: center;
 }
 
-#db-table-container th, td {
+.db-table-container th, td {
     padding: 0.2em 0.75em;
 }
 

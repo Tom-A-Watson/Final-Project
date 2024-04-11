@@ -20,7 +20,7 @@
     <form id="reservation-form">
         <div class="elem-group">
           <label for="name">Your Name</label>
-          <input type="text" id="name" name="name" placeholder="Name for the reservation" pattern=[A-Z\sa-z]{3,20} value="Tom" required>
+          <input type="text" id="name" name="name" placeholder="Name for the reservation" pattern=[A-Z\sa-z]{3,20} min="2" max="20" value="Tom" required>
         </div>
         <hr>
         <div class="elem-group inlined">

@@ -74,17 +74,3 @@ td {
     display: block;
     margin: 0 auto;
 }
-
-#details-container {
-    max-width: fit-content;
-    position: relative;
-    top: 8.5em;
-    left: 9em;
-    padding: 1em 2em;
-    background-color: var(--secondary-colour);
-}
-
-.detail-value {
-    font-family: 'Noto Sans', sans-serif;
-    padding: 0 0 0 2em;
-}

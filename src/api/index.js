@@ -35,15 +35,14 @@ reservationRoutes.createRoutes(router);
 
 app.use(function (req, res, next)
 {
-  if (res.get("Content-Type") === "text/html")
-  {
+  if (res.get("Content-Type") === "text/html") {
     res.type("json")
   }
   next();
 });
 
-let userAuthUrls = [ "/reservation", "/user/myprofile", "/api/reserve" ];
-let adminUserUrls = [ "/admin" ];
+const userAuthUrls = [ "/reservation", "/user/profile", "/api/reserve" ];
+const adminUserUrls = [ "/admin" ];
 
 app.use('/', function (req, res, next) {
   let isAdminUrl = adminUserUrls.find(url => req.url.startsWith(url));
@@ -51,7 +50,6 @@ app.use('/', function (req, res, next) {
     res.redirect("/user/loginsignup");
     return;
   }
-
   next()
 });
 
@@ -61,12 +59,8 @@ app.use('/', function (req, res, next) {
     res.redirect("/user/loginsignup");
     return;
   }
-
   next()
 });
-
-
-
 
 app.use('/', router);
 
@@ -83,6 +77,14 @@ app.get("/", (req, res) => {
     res.render("home", { title: "Home", isUserLoggedIn, req });
 }); 
 
+app.get("/user/profile", (req, res) => {
+  userService.findUser(req.session.user.username).then((details) => {
+    userService.findReservations(req.session.user.username).then((reservations) => {
+      res.render("profile", { title: "My Profile", isUserLoggedIn, req, accountDetails: details, thisUsersReservations: reservations });
+    });
+  });
+});
+
 app.get("/admin", (req, res) => {
   userService.findAll().then((users) => {
     reservationService.findAll().then((reservations) => {
@@ -93,4 +95,4 @@ app.get("/admin", (req, res) => {
 
 app.get("/reservation", (req, res) => {
   res.render("reservation", { title: "Book a Table", isUserLoggedIn, req })
-}); 
+});
