@@ -10,7 +10,7 @@ html(lang="en")
     link(rel="stylesheet", href="/css/styles.css")
     link(rel="stylesheet", href="/css/utils.css")
     link(rel="stylesheet", href="/css/reservation.css")
-    link(rel="stylesheet", href="/css/profilecards.css")
+    link(rel="stylesheet", href="/css/profile.css")
     link(rel="shortcut icon", href="/favicon.ico")
     title #{title} | Tom's Trattoria
   body
@@ -18,11 +18,24 @@ html(lang="en")
     <!-- Navigation -->
     include includes/navbar.pug
 
-    <!-- User's reservations -->
-    h3 Your reservation(s):
+    <!-- User information -->
+    h3 Your Account Details:
+    form#update-info-form
+      each detail in accountDetails
+        div.elem-group
+          label Username
+          input(type="text" id="username" name="current_username" pattern="[a-zA-Z0-9.-_]*[a-zA-Z0-9]" value=detail.username readonly)
+        div.elem-group
+          label Email
+          input(type="email" id="email" name="current_email" value=detail.email readonly)
+        button(id="editbtn" type="submit") Edit
+
+    <!-- User reservations -->
+    h3 Your Reservations:
+    div.card-container
     each reservation, index in thisUsersReservations
       -var resCount = index + 1
-      div.card.back
+      div.card.reservation-card
         div.yellow
         div.top.dots
         div.personal-info

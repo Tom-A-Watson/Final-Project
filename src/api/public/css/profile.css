@@ -1,0 +1,138 @@
+:root {
+  --card-primary: rgb(52, 41, 24);
+  --card-dots: rgb(76, 201, 200);
+  --shadow: rgba(0, 0, 0, 0.25);
+}
+
+h3 {
+  top: 4.25em;
+  margin: 0 0 4.75em 8em;
+  font-size: 1.75em;
+  font-family: 'Belanosima', sans-serif;
+  font-weight: lighter;
+  text-align: left;
+}
+
+label {
+  font-family: 'Trebuchet MS', sans-serif;
+}
+
+input {
+  max-width: 300px;
+  background-color: #ccc;
+  outline: none;
+}
+
+div.elem-group {
+  margin: 0 0 0 1em;
+}
+
+#update-info-form {
+  display: flex;
+  width: max-content;
+  margin: 0 12.75em;
+  box-shadow: 0 14px 28px var(--shadow), 0 10px 10px var(--shadow);
+  background-color: var(--card-primary);
+  border: 2px solid #ccc;
+  border-radius: 1em;
+}
+
+#editbtn {
+  top: 3em;
+  width: 4em;
+  margin: 0 1em;
+  padding: 0;
+  border-radius: 0.75em
+} #editbtn:hover {
+  border: none;
+  background-color: rgb(192, 125, 0);
+}
+
+/* .card-container {
+  display: flex;
+} */
+
+.card {
+  background-color: var(--card-primary);
+  box-shadow: 0 14px 28px var(--shadow), 0 10px 10px var(--shadow);
+  display: grid;
+  font-family: 'Trebuchet MS', sans-serif;
+  margin: 2em 2em 0 12.75em;
+  max-width: 450px;
+}
+
+.reservation-card {
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(12, 1fr);
+}
+
+.reservation-card .yellow {
+  background-color: rgba(255, 251, 32, 0.75);
+  grid-column: 1 / span 9;
+  grid-row: 1 / span 3;
+}
+
+.reservation-card .top.dots {
+  background: radial-gradient(var(--card-dots) 20%, transparent 19%), radial-gradient(var(--card-dots) 20%, transparent 19%), transparent;
+  background-size: 6px 6px;
+  background-position: 0 0, 3px 3px;
+  grid-column: 8 / span 6;
+  grid-row: 2 / span 3;
+}
+
+.reservation-card .personal-info {
+  position: relative;
+  right: 1em;
+  bottom: 0.75em;
+  min-width: 240px;
+  margin: 0 0 -8px 0;
+  grid-column: 2 / span 6;
+  grid-row: 5 / span 6;
+}
+
+.reservation-card .personal-info table {
+  border-collapse: collapse;
+}
+
+.reservation-card .personal-info p:nth-child(1) {
+  font-size: 1.75em;
+}
+
+.reservation-card .personal-info p:nth-child(2) {
+  margin: 0 0 6px 0;
+}
+
+.reservation-card .personal-info td {
+  font-size: 10px;
+}
+
+.reservation-card .personal-info td:first-of-type {
+  min-width: 154px;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.reservation-card .personal-info td:nth-of-type(2) {
+  min-width: 154px;
+  font-size: 12px;
+  margin-bottom: 15px;
+}
+
+.reservation-card .bottom.dots {
+  background: radial-gradient(#4cc9c8 20%, transparent 19%), radial-gradient(#4cc9c8 20%, transparent 19%), transparent;
+  background-size: 6px 6px;
+  background-position: 0 0, 3px 3px;
+  margin: 10px 0 0 0;
+  grid-column: 1 / span 8;
+  grid-row: 11 / span 2;
+  z-index: 2;
+}
+
+.reservation-card .pink {
+  background-color: rgba(250, 0, 25, 0.75);
+  grid-column: 8 / span 5;
+  grid-row: 10 / span 3;
+}

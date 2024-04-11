@@ -126,9 +126,10 @@ class UserRoutes
 		router.get("user/profile", async function(req, res)
 		{
 			let username = req.params.username
-			let reservationDetails = await userService.findReservations(username);
+			let accountDetails = await userService.findUser(username);
+			let userReservations = await userService.findReservations(username);
 
-			res.render("profile", reservationDetails);
+			res.render("profile", accountDetails, userReservations);
 		})
 
 		router.post("/api/admin/createadmin", upload.none(), async function(req, res) 
