@@ -1,5 +1,6 @@
 import bcrypt from 'bcrypt';
 import { dbConnect } from '../config.js';
+import { isEmpty } from '../utils.js';
 import moment from 'moment';
 
 class UserService
@@ -41,8 +42,35 @@ class UserService
 		return (rows.affectedRows > 0);
 	}
 
+	async updateUserProfile(currentUsername, currentEmail, newUsername, newEmail)
+	{
+		let connection = await dbConnect();
+
+		if (isEmpty(newUsername) || isEmpty(newEmail)) 
+		{
+			return { success: false, error: "One or more fields were left blank!" };
+		}
+
+		if (currentUsername != newUsername && await this.checkUsername(newUsername))
+		{
+			return { success: false, error: "Unable to update as the specified username already exists!" };
+		}
+		
+		if (currentEmail != newEmail && await this.checkEmail(newEmail))
+		{
+			return { success: false, error: "Unable to update as the specified email address already exists!" };
+		}
+
+		// Update was successful
+		await connection.execute("UPDATE users SET username=?, email=? WHERE username=?", [newUsername, newEmail, currentUsername]);
+		await connection.execute("UPDATE reservations SET username=? WHERE username=?", [newUsername, currentUsername]);
+
+		console.log("USER PROFILE updated");
+		return { success: true };
+	}
+
 	/**
-	 * Checks if username is in table if so return true if not return false
+	 * Checks if a given username exists in the users table, if so return true, otherwise return false
 	 * @param {string} username
 	 * @return {Promise<boolean>}
 	 */
@@ -51,30 +79,20 @@ class UserService
 		let connection = await dbConnect();
 		let [rows, fields] = await connection.execute("SELECT * FROM users WHERE username=?", [username])
 		
-		if (rows.length > 0)
-		{
-			return true;
-		}
-		
-		return false
+		return (rows.length > 0);
 	}
 	
 	/**
-	 * Checks if email is in the database
-	 * @param {string} email
-	 * @returns {Promise<boolean>}
+	 * Checks if a given email exists in the users table, if so return true, otherwise return false
+	 * @param {string} username
+	 * @return {Promise<boolean>}
 	 */
 	async checkEmail(email)
 	{
 		let connection = await dbConnect();
 		let [rows, fields] = await connection.execute("SELECT * FROM users WHERE email=?", [email])
 		
-		if (rows.length > 0)
-		{
-			return true;
-		}
-		
-		return false
+		return (rows.length > 0);
 	}
 	
 	async insertUser(username, email, password)

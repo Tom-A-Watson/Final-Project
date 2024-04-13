@@ -1,6 +1,6 @@
 import multer from 'multer';
 import { UserService } from './userService.js';
-import { isEmpty, logUserOut } from "../utils.js"
+import { isEmpty, isUserLoggedIn, logUserOut } from "../utils.js"
 import { Router } from 'express';
 
 class UserRoutes
@@ -123,14 +123,55 @@ class UserRoutes
 			res.redirect("/");
 		})
 
-		router.get("user/profile", async function(req, res)
+		router.get("/user/profile", async function(req, res)
 		{
-			let username = req.params.username
-			let accountDetails = await userService.findUser(username);
-			let userReservations = await userService.findReservations(username);
-
-			res.render("profile", accountDetails, userReservations);
+			let username = req.session.user.username;
+			userService.findUser(username).then((details) => {
+				userService.findReservations(username).then((reservations) => 
+				{
+					res.render("profile", { title: "My Profile", isUserLoggedIn, req, accountDetails: details, thisUsersReservations: reservations });
+				});
+			});
 		})
+
+		router.post("/user/profile", upload.none(), async function(req, res)
+		{
+			console.log("Editing = " + JSON.stringify(req.body));
+			let username = req.session.user.username;
+			let email = req.session.user.email;
+			userService.findUser(username).then((details) => {
+				userService.findReservations(username).then((reservations) => 
+				{	
+					console.log("Editing = " + JSON.stringify(req.body));
+					
+					switch(req.body.editAction) 
+					{
+						case "beginEdit":
+							res.render("profile", { title: "My Profile", isUserLoggedIn, req, accountDetails: details, thisUsersReservations: reservations, editing: true });
+							break;
+
+						case "cancelEdit":
+							res.redirect("/user/profile");
+							break;
+
+						case "saveEdit":
+							userService.updateUserProfile(username, email, req.body.username, req.body.email).then(result => { 
+								console.log("ROUTE UPDATE CALLED = " + JSON.stringify(result));
+								
+								if (result.success) 
+								{
+									req.session.user.username = req.body.username;
+									req.session.user.email = req.body.email;
+									res.redirect("/user/profile");
+									return;
+								}
+
+								res.render("profile", { title: "My Profile", isUserLoggedIn, req, accountDetails: details, thisUsersReservations: reservations, error: result.error });
+							});
+					}
+				});
+			});
+		});
 
 		router.post("/api/admin/createadmin", upload.none(), async function(req, res) 
 		{

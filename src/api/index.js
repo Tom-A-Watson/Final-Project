@@ -26,6 +26,7 @@ app.use(session({
   resave: false,
   saveUninitialized: true
 }));
+app.use(express.urlencoded());
 
 const userRoutes = new UserRoutes();
 userRoutes.createRoutes(router);
@@ -75,14 +76,6 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/", (req, res) => {
     res.render("home", { title: "Home", isUserLoggedIn, req });
-}); 
-
-app.get("/user/profile", (req, res) => {
-  userService.findUser(req.session.user.username).then((details) => {
-    userService.findReservations(req.session.user.username).then((reservations) => {
-      res.render("profile", { title: "My Profile", isUserLoggedIn, req, accountDetails: details, thisUsersReservations: reservations });
-    });
-  });
 });
 
 app.get("/admin", (req, res) => {
