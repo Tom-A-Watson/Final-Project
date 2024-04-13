@@ -12,21 +12,23 @@ import { ReservationRoutes } from './reservationAuth/reservationRoutes.js';
 import { ReservationService } from './reservationAuth/reservationService.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const app = express()
+const app = express();
 const router = express.Router();
-const port = 3000
+const port = 3000;
 const userService = new UserService();
 const reservationService = new ReservationService();
+const userAuthUrls = [ "/reservation", "/user/profile", "/api/reserve" ];
+const adminUserUrls = [ "/admin" ];
 
-app.use(cors())
-app.use(cookieParser())
+app.use(cors());
+app.use(cookieParser());
+app.use(express.urlencoded());
 
 app.use(session({
   secret: "z;t7T6dxV~*p/AXX4duv7q9)c",
   resave: false,
   saveUninitialized: true
 }));
-app.use(express.urlencoded());
 
 const userRoutes = new UserRoutes();
 userRoutes.createRoutes(router);
@@ -41,9 +43,6 @@ app.use(function (req, res, next)
   }
   next();
 });
-
-const userAuthUrls = [ "/reservation", "/user/profile", "/api/reserve" ];
-const adminUserUrls = [ "/admin" ];
 
 app.use('/', function (req, res, next) {
   let isAdminUrl = adminUserUrls.find(url => req.url.startsWith(url));

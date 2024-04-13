@@ -15,10 +15,10 @@ html(lang="en")
     title #{title} | Tom's Trattoria
   body
 
-    <!-- Navigation -->
+    //- Navigation
     include includes/navbar.pug
 
-    <!-- User information -->
+    //- User information
     h3 Your Account Details:
     if error
       p#update-errormsg #{error} 
@@ -43,7 +43,7 @@ html(lang="en")
         else
           button.actionbtn(id="editbtn" name="editAction" type="submit" value="beginEdit") Edit
 
-    <!-- User reservations -->
+    //- User reservations 
     h3 Your Reservations:
     div.card-container
     each reservation, index in thisUsersReservations
