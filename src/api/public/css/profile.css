@@ -1,5 +1,5 @@
 :root {
-  --card-primary: rgb(52, 41, 24);
+  --profile-primary: rgb(52, 41, 24);
   --card-dots: rgb(76, 201, 200);
   --shadow: rgba(0, 0, 0, 0.25);
 }
@@ -14,6 +14,7 @@ h3 {
 }
 
 label {
+  margin: 0 0 8px 6px;
   font-family: 'Trebuchet MS', sans-serif;
 }
 
@@ -32,28 +33,60 @@ div.elem-group {
   width: max-content;
   margin: 0 12.75em;
   box-shadow: 0 14px 28px var(--shadow), 0 10px 10px var(--shadow);
-  background-color: var(--card-primary);
+  background-color: var(--profile-primary);
   border: 2px solid #ccc;
   border-radius: 1em;
 }
 
-#editbtn {
+.editable {
+  background-color: white;
+}
+
+.actionbtn {
   top: 3em;
-  width: 4em;
   margin: 0 1em;
-  padding: 0;
+  padding: 0 2em;
   border-radius: 0.75em
-} #editbtn:hover {
+} 
+
+#savebtn {
+  background-color: rgb(71, 212, 39);
+} #savebtn:hover {
+  border: none;
+  background-color: rgb(71, 150, 39);
+}
+
+#cancelbtn {
+  margin: 0 1em 0 0;
+  padding: 0 1.62em;
+  background-color: rgb(214, 25, 25);
+} #cancelbtn:hover {
+  border: none;
+  background-color: rgb(172, 0, 0);
+}
+
+#editbtn:hover {
   border: none;
   background-color: rgb(192, 125, 0);
-}
+} 
+
+#update-errormsg {
+  max-width: max-content;
+  display: block;
+  margin: 1.5em 14em;
+  padding: 0.75em 1.5em;
+  background-color: rgba(235, 87, 54, 0.5);
+  border: 3px solid rgb(235, 158, 140);
+  border-radius: 6px;
+  font-size: 1em;
+} 
 
 /* .card-container {
   display: flex;
 } */
 
 .card {
-  background-color: var(--card-primary);
+  background-color: var(--profile-primary);
   box-shadow: 0 14px 28px var(--shadow), 0 10px 10px var(--shadow);
   display: grid;
   font-family: 'Trebuchet MS', sans-serif;

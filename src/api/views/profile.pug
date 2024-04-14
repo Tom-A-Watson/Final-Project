@@ -15,22 +15,35 @@ html(lang="en")
     title #{title} | Tom's Trattoria
   body
 
-    <!-- Navigation -->
+    //- Navigation
     include includes/navbar.pug
 
-    <!-- User information -->
+    //- User information
     h3 Your Account Details:
-    form#update-info-form
+    if error
+      p#update-errormsg #{error} 
+    form#update-info-form(method="post" enctype="application/x-www-form-urlencoded")
       each detail in accountDetails
         div.elem-group
-          label Username
-          input(type="text" id="username" name="current_username" pattern="[a-zA-Z0-9.-_]*[a-zA-Z0-9]" value=detail.username readonly)
+          if !editing
+            label Username
+          else
+            label New Username
+          input(class= editing ? "editable" : "" type="text" id="currentusername" name="username" pattern="[a-zA-Z0-9.-_]*[a-zA-Z0-9]" value=detail.username readonly=!editing)
         div.elem-group
-          label Email
-          input(type="email" id="email" name="current_email" value=detail.email readonly)
-        button(id="editbtn" type="submit") Edit
+          if !editing
+            label Email
+          else
+            label New Email
+          input(class= editing ? "editable" : "" type="email" id="currentemail" name="email" value=detail.email readonly=!editing)
+          span(type="hidden" name="editing" value="true")
+        if editing
+          button.actionbtn(id="savebtn" name="editAction" type="submit" value="saveEdit") Save
+          button.actionbtn(id="cancelbtn" name="editAction" type="submit" value="cancelEdit") Cancel
+        else
+          button.actionbtn(id="editbtn" name="editAction" type="submit" value="beginEdit") Edit
 
-    <!-- User reservations -->
+    //- User reservations 
     h3 Your Reservations:
     div.card-container
     each reservation, index in thisUsersReservations

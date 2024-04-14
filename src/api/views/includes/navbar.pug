@@ -15,5 +15,6 @@ header.navbar
                 li
                   if isUserLoggedIn(req) 
                     a(href="/user/logout") Log out
+                    a(href="/user/profile") My Profile
                   else
                     a(href="/user/loginsignup") Log in/ Sign up

@@ -12,14 +12,17 @@ import { ReservationRoutes } from './reservationAuth/reservationRoutes.js';
 import { ReservationService } from './reservationAuth/reservationService.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const app = express()
+const app = express();
 const router = express.Router();
-const port = 3000
+const port = 3000;
 const userService = new UserService();
 const reservationService = new ReservationService();
+const userAuthUrls = [ "/reservation", "/user/profile", "/api/reserve" ];
+const adminUserUrls = [ "/admin" ];
 
-app.use(cors())
-app.use(cookieParser())
+app.use(cors());
+app.use(cookieParser());
+app.use(express.urlencoded());
 
 app.use(session({
   secret: "z;t7T6dxV~*p/AXX4duv7q9)c",
@@ -40,9 +43,6 @@ app.use(function (req, res, next)
   }
   next();
 });
-
-const userAuthUrls = [ "/reservation", "/user/profile", "/api/reserve" ];
-const adminUserUrls = [ "/admin" ];
 
 app.use('/', function (req, res, next) {
   let isAdminUrl = adminUserUrls.find(url => req.url.startsWith(url));
@@ -75,14 +75,6 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/", (req, res) => {
     res.render("home", { title: "Home", isUserLoggedIn, req });
-}); 
-
-app.get("/user/profile", (req, res) => {
-  userService.findUser(req.session.user.username).then((details) => {
-    userService.findReservations(req.session.user.username).then((reservations) => {
-      res.render("profile", { title: "My Profile", isUserLoggedIn, req, accountDetails: details, thisUsersReservations: reservations });
-    });
-  });
 });
 
 app.get("/admin", (req, res) => {
