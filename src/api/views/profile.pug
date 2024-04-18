@@ -23,19 +23,19 @@ html(lang="en")
     if error
       p#update-errormsg #{error} 
     form#update-info-form(method="post" enctype="application/x-www-form-urlencoded")
-      each detail in accountDetails
+      each accountDetail in accountDetails
         div.elem-group
           if !editing
             label Username
           else
             label New Username
-          input(class= editing ? "editable" : "" type="text" id="currentusername" name="username" pattern="[a-zA-Z0-9.-_]*[a-zA-Z0-9]" value=detail.username readonly=!editing)
+          input(class= editing ? "editable" : "" type="text" id="currentusername" name="username" pattern="[a-zA-Z0-9.-_]*[a-zA-Z0-9]" value=accountDetail.username readonly=!editing)
         div.elem-group
           if !editing
             label Email
           else
             label New Email
-          input(class= editing ? "editable" : "" type="email" id="currentemail" name="email" value=detail.email readonly=!editing)
+          input(class= editing ? "editable" : "" type="email" id="currentemail" name="email" value=accountDetail.email readonly=!editing)
           span(type="hidden" name="editing" value="true")
         if editing
           button.actionbtn(id="savebtn" name="editAction" type="submit" value="saveEdit") Save

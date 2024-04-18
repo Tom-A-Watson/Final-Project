@@ -51,9 +51,20 @@ class ReservationService
 			
 			if (rows.length > 0) 
 			{
-				console.log("\nFirst row: " + JSON.stringify(rows[0]))
-				await connection.execute("INSERT INTO reservations (username, tableNumber, name, guestCount, dateTime, duration) VALUES (?, ?, ?, ?, ?, ?)", 
-                [username, rows[0].tableNumber, name, guestCount, dateTime, 120]);
+				let tablesToAllocate = this.allocateTables(rows, guestCount);
+				let totalSeatsInAllocatedTables = 0;
+
+				for (let i = 0; i < tablesToAllocate.length; i++) {
+					totalSeatsInAllocatedTables = totalSeatsInAllocatedTables + tablesToAllocate[i].seatCount
+					await connection.execute("INSERT INTO reservations (username, tableNumber, name, guestCount, dateTime, duration) VALUES (?, ?, ?, ?, ?, ?)", 
+                		[username, tablesToAllocate[i].tableNumber, name, guestCount, dateTime, 120]);
+				}
+
+				if (guestCount > totalSeatsInAllocatedTables) 
+				{
+					return false;
+				}
+
 				return true; // Reservation is inserted successfully
 			}
 
