@@ -42,16 +42,29 @@ class ReservationService
 				"WHERE rt.tableNumber NOT IN (SELECT r.tableNumber " +
 											 "FROM reservations r " +
 											 "WHERE STR_TO_DATE(?, '%Y-%m-%dT%T') BETWEEN r.dateTime AND DATE_ADD(r.dateTime, INTERVAL r.duration MINUTE) " +
-											 "OR DATE_ADD(STR_TO_DATE(?, '%Y-%m-%dT%T'), INTERVAL ? MINUTE) BETWEEN r.dateTime AND DATE_ADD(r.dateTime, INTERVAL r.duration MINUTE)) " +
-				"AND rt.seatCount >= ? order by rt.seatCount", [dateTime, dateTime, 120, guestCount]);
+											 "OR DATE_ADD(STR_TO_DATE(?, '%Y-%m-%dT%T'), INTERVAL ? MINUTE) BETWEEN r.dateTime AND DATE_ADD(r.dateTime, INTERVAL r.duration MINUTE)) ", 
+											 [dateTime, dateTime, 120]);
 
 			console.log("\nROWS IN RESTAURANT_TABLES: " + rows)	
+			// Insert iterative logic here for multiple tables if the guestCount exceeds 4
+			console.log("\nTables available for the reservation are: " + JSON.stringify(this.allocateTables(rows, guestCount)))
 			
 			if (rows.length > 0) 
 			{
-				console.log("\nFirst row: " + JSON.stringify(rows[0]))
-				await connection.execute("INSERT INTO reservations (username, tableNumber, name, guestCount, dateTime, duration) VALUES (?, ?, ?, ?, ?, ?)", 
-                [username, rows[0].tableNumber, name, guestCount, dateTime, 120]);
+				let tablesToAllocate = this.allocateTables(rows, guestCount);
+				let totalSeatsInAllocatedTables = 0;
+
+				for (let i = 0; i < tablesToAllocate.length; i++) {
+					totalSeatsInAllocatedTables = totalSeatsInAllocatedTables + tablesToAllocate[i].seatCount
+					await connection.execute("INSERT INTO reservations (username, tableNumber, name, guestCount, dateTime, duration) VALUES (?, ?, ?, ?, ?, ?)", 
+                		[username, tablesToAllocate[i].tableNumber, name, guestCount, dateTime, 120]);
+				}
+
+				if (guestCount > totalSeatsInAllocatedTables) 
+				{
+					return false;
+				}
+
 				return true; // Reservation is inserted successfully
 			}
 
@@ -62,6 +75,28 @@ class ReservationService
 			console.error("Error: ", error);
 			return { error: error }; // Return the error
 		}
+	}
+
+	allocateTables(availableTables, guestCount) 
+	{
+		if (availableTables === null || guestCount <= 0) return [];
+	  
+		let guestsToBeSeated = guestCount;
+		let tablesToBeAllocated = availableTables;
+		let tablesToAllocate = [];
+		
+		while (guestsToBeSeated > 0 && tablesToBeAllocated.length > 0) {
+			let firstTableWithSizeClosestToGuestCount = tablesToBeAllocated.sort((a, b) => 
+			  Math.abs(guestsToBeSeated-a.seatCount) - Math.abs(guestsToBeSeated-b.seatCount));
+			
+			if (firstTableWithSizeClosestToGuestCount.length === 0) return [];
+			
+			tablesToAllocate.push(firstTableWithSizeClosestToGuestCount[0]);
+			tablesToBeAllocated = tablesToBeAllocated.filter(item => item !== firstTableWithSizeClosestToGuestCount[0]);
+			guestsToBeSeated = guestsToBeSeated-firstTableWithSizeClosestToGuestCount[0].seatCount;
+		}
+
+		return guestsToBeSeated > 0 ? [] : tablesToAllocate;
 	}
 }
 

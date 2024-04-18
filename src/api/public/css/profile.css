@@ -81,10 +81,6 @@ div.elem-group {
   font-size: 1em;
 } 
 
-/* .card-container {
-  display: flex;
-} */
-
 .card {
   background-color: var(--profile-primary);
   box-shadow: 0 14px 28px var(--shadow), 0 10px 10px var(--shadow);
