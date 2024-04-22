@@ -4,7 +4,7 @@
 function scrollToLogin() {
     document.querySelector("#form").style.marginLeft="0";
     document.querySelector(".signup").style.background = "none";
-    document.querySelector(".login").style.background = "linear-gradient(45deg, #24058e, #b60089)";
+    document.querySelector(".login").style.background = "linear-gradient(45deg, var(--secondary-color), var(--accent-gradient)";
     document.querySelectorAll(".switch")[0].classList.remove("active");
 }
     
@@ -14,7 +14,7 @@ function scrollToLogin() {
 function scrollToSignUp() {
     document.querySelector("#form").style.marginLeft="-100%";
     document.querySelector(".login").style.background = "none";
-    document.querySelector(".signup").style.background = "linear-gradient(45deg, #24058e, #b60089)";
+    document.querySelector(".signup").style.background = "linear-gradient(45deg, var(--secondary-color), var(--accent-gradient)";
     document.querySelectorAll(".switch")[0].classList.add("active");
 }
 

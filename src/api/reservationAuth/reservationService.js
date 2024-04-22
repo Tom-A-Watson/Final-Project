@@ -79,8 +79,11 @@ class ReservationService
 
 	allocateTables(availableTables, guestCount) 
 	{
-		if (availableTables === null || guestCount <= 0) return [];
-	  
+		if (availableTables == null || guestCount <= 0) 
+		{ 
+			return [];
+		}
+
 		let guestsToBeSeated = guestCount;
 		let tablesToBeAllocated = availableTables;
 		let tablesToAllocate = [];
@@ -89,11 +92,14 @@ class ReservationService
 			let firstTableWithSizeClosestToGuestCount = tablesToBeAllocated.sort((a, b) => 
 			  Math.abs(guestsToBeSeated-a.seatCount) - Math.abs(guestsToBeSeated-b.seatCount));
 			
-			if (firstTableWithSizeClosestToGuestCount.length === 0) return [];
+			if (firstTableWithSizeClosestToGuestCount.length == 0) 
+			{
+				return [];
+			}
 			
 			tablesToAllocate.push(firstTableWithSizeClosestToGuestCount[0]);
 			tablesToBeAllocated = tablesToBeAllocated.filter(item => item !== firstTableWithSizeClosestToGuestCount[0]);
-			guestsToBeSeated = guestsToBeSeated-firstTableWithSizeClosestToGuestCount[0].seatCount;
+			guestsToBeSeated = guestsToBeSeated - firstTableWithSizeClosestToGuestCount[0].seatCount;
 		}
 
 		return guestsToBeSeated > 0 ? [] : tablesToAllocate;
