@@ -1,7 +1,7 @@
 header.navbar
     div.container.flex
         span#title Tom's Trattoria
-        <!-- <img id="navbar-logo" src="" alt="Site Logo"> -->
+        img#navbar-logo(src="/img/tomstrattorialogo.png" alt="Site Logo") 
         nav
             ul
                 li
@@ -14,7 +14,9 @@ header.navbar
                   a#contactbtn(href="") Contact Us
                 li
                   if isUserLoggedIn(req) 
-                    a(href="/user/logout") Log out
                     a(href="/user/profile") My Profile
+                    a(href="/user/logout") Log out
                   else
                     a(href="/user/loginsignup") Log in/ Sign up
+                  if isAdminUserLoggedIn(req)
+                    a(href="/admin") Admin Panel

@@ -15,17 +15,11 @@ document.querySelector("#reservation-form").addEventListener("submit", e => {
 	{
 		if (!res.ok)
 		{
-			// alert("Reservation was unsuccessful");
-			// res.json().then(json =>
-			// {
-				
-			// })
-
-			// Change the DOM/HTML on the page to reflect the failed reservation
-			//
-			document.querySelector("#messages").innerHTML = 'There is no table available at the selected time'; 
+			console.log(res.json({error}));
+			document.querySelector("#messages").innerHTML = "Could not reserve"; 
 			return;
 		}
-		alert("Your table is now reserved!!")
+
+		alert("Your table is now reserved!!");
 	})
 });

@@ -10,7 +10,6 @@ function isEmpty(str)
 
 function isUserLoggedIn(req) 
 {
-    let userLoggedIn = req.session.user != null;
     return req.session.user != null;
 }
 

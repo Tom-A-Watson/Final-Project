@@ -1,6 +1,6 @@
 import multer from 'multer';
 import { UserService } from './userService.js';
-import { isEmpty, isUserLoggedIn, logUserOut } from "../utils.js"
+import { isEmpty, isUserLoggedIn, isAdminUserLoggedIn, logUserOut } from "../utils.js"
 import { Router } from 'express';
 
 class UserRoutes
@@ -129,7 +129,7 @@ class UserRoutes
 			userService.findUser(username).then((details) => {
 				userService.findReservations(username).then((reservations) => 
 				{
-					res.render("profile", { title: "My Profile", isUserLoggedIn, req, accountDetails: details, thisUsersReservations: reservations });
+					res.render("profile", { title: "My Profile", isUserLoggedIn, isAdminUserLoggedIn, req, accountDetails: details, thisUsersReservations: reservations });
 				});
 			});
 		})
@@ -147,7 +147,7 @@ class UserRoutes
 					switch(req.body.editAction) 
 					{
 						case "beginEdit":
-							res.render("profile", { title: "My Profile", isUserLoggedIn, req, accountDetails: details, thisUsersReservations: reservations, editing: true });
+							res.render("profile", { title: "My Profile", isUserLoggedIn, isAdminUserLoggedIn, req, accountDetails: details, thisUsersReservations: reservations, editing: true });
 							break;
 
 						case "cancelEdit":
@@ -155,25 +155,32 @@ class UserRoutes
 							break;
 
 						case "saveEdit":
-							userService.updateUserProfile(username, email, req.body.username, req.body.email).then(result => { 
+							let newUsername = req.body.username;
+							let newEmail = req.body.email;
+							userService.updateUserProfile(username, email, newUsername, newEmail).then(result => { 
 								console.log("ROUTE UPDATE CALLED = " + JSON.stringify(result));
 								
 								if (result.success) 
 								{
-									req.session.user.username = req.body.username;
-									req.session.user.email = req.body.email;
+									req.session.user.username = newUsername;
+									req.session.user.email = newEmail;
 									res.redirect("/user/profile");
 									return;
 								}
 
-								res.render("profile", { title: "My Profile", isUserLoggedIn, req, accountDetails: details, thisUsersReservations: reservations, error: result.error });
+								res.render("profile", { title: "My Profile", isUserLoggedIn, isAdminUserLoggedIn, req, accountDetails: details, thisUsersReservations: reservations, error: result.error });
 							});
 					}
 				});
 			});
 		});
 
-		router.post("/api/admin/createadmin", upload.none(), async function(req, res) 
+		router.get("/createadmin", async function(req, res) 
+		{
+			res.render("createadmin", { title: "Create Administrator", isUserLoggedIn, isAdminUserLoggedIn, req })
+		})
+
+		router.post("/createadmin", upload.none(), async function(req, res) 
 		{
 			if (!req.body)
 			{

@@ -40,10 +40,10 @@ class ReservationService
 			let [rows, fields] = await connection.execute(
 				"SELECT * FROM restaurant_tables rt " +
 				"WHERE rt.tableNumber NOT IN (SELECT r.tableNumber " +
-											 "FROM reservations r " +
-											 "WHERE STR_TO_DATE(?, '%Y-%m-%dT%T') BETWEEN r.dateTime AND DATE_ADD(r.dateTime, INTERVAL r.duration MINUTE) " +
-											 "OR DATE_ADD(STR_TO_DATE(?, '%Y-%m-%dT%T'), INTERVAL ? MINUTE) BETWEEN r.dateTime AND DATE_ADD(r.dateTime, INTERVAL r.duration MINUTE)) ", 
-											 [dateTime, dateTime, 120]);
+					"FROM reservations r " +
+					"WHERE STR_TO_DATE(?, '%Y-%m-%dT%T') BETWEEN r.dateTime AND DATE_ADD(r.dateTime, INTERVAL r.duration MINUTE) " +
+					"OR DATE_ADD(STR_TO_DATE(?, '%Y-%m-%dT%T'), INTERVAL ? MINUTE) BETWEEN r.dateTime AND DATE_ADD(r.dateTime, INTERVAL r.duration MINUTE)) ", 
+					[dateTime, dateTime, 120]);
 
 			console.log("\nROWS IN RESTAURANT_TABLES: " + rows)	
 			// Insert iterative logic here for multiple tables if the guestCount exceeds 4
@@ -86,23 +86,23 @@ class ReservationService
 
 		let guestsToBeSeated = guestCount;
 		let tablesToBeAllocated = availableTables;
-		let tablesToAllocate = [];
+		let allocatedTables = [];
 		
 		while (guestsToBeSeated > 0 && tablesToBeAllocated.length > 0) {
 			let firstTableWithSizeClosestToGuestCount = tablesToBeAllocated.sort((a, b) => 
-			  Math.abs(guestsToBeSeated-a.seatCount) - Math.abs(guestsToBeSeated-b.seatCount));
+			  Math.abs(guestsToBeSeated - a.seatCount) - Math.abs(guestsToBeSeated - b.seatCount));
 			
 			if (firstTableWithSizeClosestToGuestCount.length == 0) 
 			{
 				return [];
 			}
 			
-			tablesToAllocate.push(firstTableWithSizeClosestToGuestCount[0]);
+			allocatedTables.push(firstTableWithSizeClosestToGuestCount[0]);
 			tablesToBeAllocated = tablesToBeAllocated.filter(item => item !== firstTableWithSizeClosestToGuestCount[0]);
 			guestsToBeSeated = guestsToBeSeated - firstTableWithSizeClosestToGuestCount[0].seatCount;
 		}
 
-		return guestsToBeSeated > 0 ? [] : tablesToAllocate;
+		return guestsToBeSeated > 0 ? [] : allocatedTables;
 	}
 }
 

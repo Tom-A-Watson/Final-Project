@@ -17,7 +17,7 @@ html(lang="en")
     <!-- Navigation -->
     include includes/navbar.pug
 
-    a#create-admin(href="/admin/createadmin.html") Create Administrator
+    a#create-admin(href="/createadmin") Create Administrator
 
     <!-- Database tables --> 
     h2 Users:
@@ -41,7 +41,6 @@ html(lang="en")
                     ul
                       li
                         a.delete-user(href="", data-username=user.username) Delete
-                      li(href="updateuser.html") Update
 
     h2 Reservations:
     div.db-table-container
@@ -70,7 +69,5 @@ html(lang="en")
                     ul
                       li
                         a.delete-reservation(href="", data-reservation=reservation.id) Delete
-                      li 
-                        a(href="updatereservation.html") Update 
     
     script(src="/js/admin.js")

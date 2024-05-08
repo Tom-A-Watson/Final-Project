@@ -28,8 +28,8 @@ document.querySelector("#createadmin-form").addEventListener("submit", e => {
 	formData.append("email", document.querySelector("#admin-email").value)
 	formData.append("password", document.querySelector("#admin-password").value)
 	formData.append("isAdmin", document.querySelector("#is-admin").value)
-	
-    fetch("http://localhost:3000/api/admin/createadmin", {
+
+    fetch("/createadmin", {
 		method: "POST",
 		body: formData
 	}).then(res =>
@@ -52,5 +52,5 @@ function sendResult(res)
         return;
     }
 
-    window.location.href = "http://localhost:3000/admin"
+    window.location.href = "/admin"
 }

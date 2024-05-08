@@ -17,35 +17,35 @@
     <!-- Navigation -->
     include includes/navbar.pug
 
+    h1 Book a Table
+
     <form id="reservation-form">
         <div class="elem-group">
           <label for="name">Your Name</label>
-          <input type="text" id="name" name="name" placeholder="Name for the reservation" pattern=[A-Z\sa-z]{3,20} min="2" max="20" value="Tom" required>
+          <input type="text" id="name" name="name" placeholder="Name for the reservation" pattern=[A-Z\sa-z]{3,20} min="2" max="20" required>
         </div>
         <hr>
         <div class="elem-group inlined">
           <label>Adults</label>
-          <input type="number" id="adults" name="total_adults" placeholder="Number of adults..." min="1" max="14" value="2" required>
+          <input type="number" id="adults" name="total_adults" placeholder="Number of adults..." min="1" max="14" required>
         </div>
         <div class="elem-group inlined">
           <label>Children</label>
-          <input type="number" id="children" name="total_children" placeholder="Number of children..." min="0" value="1" required>
+          <input type="number" id="children" name="total_children" placeholder="Number of children..." min="0">
         </div>
         <div class="elem-group inlined">
           <label>Reservation Date</label>
-          <input type="datetime-local" id="datetime" name="reservation_date" value="2024-03-16T20:00" required>
+          <input type="datetime-local" id="datetime" name="reservation_date" placeholder="dd/mm/yyyy HH:mm" required>
         </div>
         <div class="elem-group inlined">
           <label>Duration</label>
           <select id="duration" name="room_preference" required>
               <option>2 hours</option>
-              <option>2.5 hours</option>
-              <option>3 hours</option>
           </select>
         </div>
         <hr>
         <p id="messages"></p>
-        <button type="submit">Book Now</button>
+        <button id="reservebtn" type="submit">Book Now</button>
     </form>
     <script src="/js/reservation.js"></script>
 </body>

@@ -18,7 +18,7 @@ const port = 3000;
 const userService = new UserService();
 const reservationService = new ReservationService();
 const userAuthUrls = [ "/reservation", "/user/profile", "/api/reserve" ];
-const adminUserUrls = [ "/admin" ];
+const adminUserUrls = [ "/admin", "/createadmin" ];
 
 app.use(cors());
 app.use(cookieParser());
@@ -74,17 +74,17 @@ app.set("view engine", "pug");
 app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/", (req, res) => {
-    res.render("home", { title: "Home", isUserLoggedIn, req });
+    res.render("home", { title: "Home", isUserLoggedIn, isAdminUserLoggedIn, req });
 });
 
 app.get("/admin", (req, res) => {
   userService.findAll().then((users) => {
     reservationService.findAll().then((reservations) => {
-      res.render("admin", { title: "Admin", isUserLoggedIn, req, users: users, reservations: reservations });
+      res.render("admin", { title: "Admin", isUserLoggedIn, isAdminUserLoggedIn, req, users: users, reservations: reservations });
     }); 
   });
 });
 
 app.get("/reservation", (req, res) => {
-  res.render("reservation", { title: "Book a Table", isUserLoggedIn, req })
+  res.render("reservation", { title: "Book a Table", isUserLoggedIn, isAdminUserLoggedIn, req })
 });

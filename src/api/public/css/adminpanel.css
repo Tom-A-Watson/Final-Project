@@ -3,6 +3,14 @@ h2 {
     text-align: center;
 }
 
+ul {
+    list-style-type: none;
+}
+
+li {
+    text-align: center;
+}
+
 #create-admin {
     position: relative;
     top: 6em;
@@ -107,6 +115,11 @@ td {
     max-width: 500px;
     display: block;
     margin: 0 auto;
+}
+
+.delete-user, .delete-reservation {
+    color: red;
+    font-weight: bold;
 }
 
 #is-admin {

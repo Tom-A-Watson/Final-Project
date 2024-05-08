@@ -18,17 +18,22 @@ class ReservationRoutes
         router.post("/api/reserve/", upload.none(), async function(req, res)
         {
             let username = req.session.user.username;
-
+            
             if (!req.body)
 			{
 				res.status(400)
 				res.json({error: "One or more fields were not filled out"});
 				return;
 			}
-
+            
             let { tableNumber, name, adults, children, dateTime, duration } = req.body;
+
+            if (isEmpty(children))
+            {
+                children = 0;
+            }
 			
-			if (isEmpty(name) || isEmpty(children) || isEmpty(dateTime))
+			if (isEmpty(name) || isEmpty(dateTime))
 			{
 				res.status(400)
 				res.json({error: "One or more fields were not filled out"});

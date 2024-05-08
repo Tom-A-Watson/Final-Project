@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/utils.css">
+    <link rel="stylesheet" href="/css/adminpanel.css">
+    <title>Tom's Trattoria</title>
+</head>
+<body>
+
+    <!-- Navigation -->
+    include includes/navbar.pug
+
+    <h1>Create an Administrator</h2>
+    <form id="createadmin-form">
+      <hr>
+        <div class="elem-group">
+          <label for="username">Username</label>
+          <input type="text" id="admin-username" name="admin_username" pattern="[a-zA-Z0-9.-_]*[a-zA-Z0-9]" required>
+        </div>
+        <div class="elem-group">
+          <label>Email</label>
+          <input type="email" id="admin-email" name="admin_email" required>
+        </div>
+        <div class="elem-group inlined">
+          <label>Password</label>
+          <input type="password" id="admin-password" name="admin_password" required>
+        </div>
+        <div class="elem-group inlined">
+          <label>Admin</label>
+          <input type="text" id="is-admin" name="is_admin" placeholder="True" readonly>
+        </div>
+      <hr>
+        <p id="messages"></p>
+        <button type="submit">Create</button>
+    </form>
+    script(src="/js/admin.js")
+</body>
+</html>

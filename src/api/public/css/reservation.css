@@ -58,8 +58,8 @@ button {
     cursor: pointer;
 }
 
-button:hover {
-    border: 2px solid black;
+#reservebtn:hover, #reservebtn:active {
+    transform: scale(1.05);
 }
 
 td {

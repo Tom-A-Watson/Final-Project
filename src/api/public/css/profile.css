@@ -60,6 +60,7 @@ div.elem-group {
   margin: 0 1em 0 0;
   padding: 0 1.62em;
   background-color: rgb(214, 25, 25);
+  color: white;
 } #cancelbtn:hover {
   border: none;
   background-color: rgb(172, 0, 0);
@@ -71,9 +72,10 @@ div.elem-group {
 } 
 
 #update-errormsg {
+  position: relative;
+  left: 13em;
   max-width: max-content;
-  display: block;
-  margin: 1.5em 14em;
+  margin: 1.5em 0;
   padding: 0.75em 1.5em;
   background-color: rgba(235, 87, 54, 0.5);
   border: 3px solid rgb(235, 158, 140);
@@ -86,7 +88,7 @@ div.elem-group {
   box-shadow: 0 14px 28px var(--shadow), 0 10px 10px var(--shadow);
   display: grid;
   font-family: 'Trebuchet MS', sans-serif;
-  margin: 2em 2em 0 12.75em;
+  margin: 2em 2em 2em 12.75em;
   max-width: 450px;
 }
 

@@ -18,6 +18,9 @@ html(lang="en")
     //- Navigation
     include includes/navbar.pug
 
+    each accountDetail in accountDetails
+      h1 #{accountDetail.username}'s Profile
+
     //- User information
     h3 Your Account Details:
     if error
@@ -46,8 +49,7 @@ html(lang="en")
     //- User reservations 
     h3 Your Reservations:
     div.card-container
-    each reservation, index in thisUsersReservations
-      -var resCount = index + 1
+    each reservation in thisUsersReservations
       div.card.reservation-card
         div.yellow
         div.top.dots
@@ -55,7 +57,7 @@ html(lang="en")
           table
             thead
               tr 
-                p= 'Reservation ' + resCount
+                p Table #{reservation.tableNumber}
                 p #{reservation.dateTime}
             tbody
               tr
@@ -64,9 +66,6 @@ html(lang="en")
               tr
                 td Number of Guests: 
                 td #{reservation.guestCount}
-              tr
-                td Table Number:
-                td #{reservation.tableNumber}
               tr 
                 td Duration:
                 td 2 Hours
