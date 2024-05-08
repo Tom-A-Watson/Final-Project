@@ -30,20 +30,21 @@ class ReservationService
 
 		try
 		{
-			console.log("username=" + username);
-			console.log("tableNumber=" + tableNumber);
-			console.log("name=" + name);
-			console.log("guestCount=" + guestCount);
-			console.log("dateTime=" + dateTime);
-			console.log("duration=" + duration);
+			tableNumber = 0;
+			duration = 120;
+
+			if (guestCount > 14)
+			{
+				return false;
+			}
 
 			let [rows, fields] = await connection.execute(
 				"SELECT * FROM restaurant_tables rt " +
-				"WHERE rt.tableNumber NOT IN (SELECT r.tableNumber " +
-					"FROM reservations r " +
-					"WHERE STR_TO_DATE(?, '%Y-%m-%dT%T') BETWEEN r.dateTime AND DATE_ADD(r.dateTime, INTERVAL r.duration MINUTE) " +
-					"OR DATE_ADD(STR_TO_DATE(?, '%Y-%m-%dT%T'), INTERVAL ? MINUTE) BETWEEN r.dateTime AND DATE_ADD(r.dateTime, INTERVAL r.duration MINUTE)) ", 
-					[dateTime, dateTime, 120]);
+					"WHERE rt.tableNumber NOT IN (SELECT r.tableNumber " +
+						"FROM reservations r " +
+							"WHERE STR_TO_DATE(?, '%Y-%m-%dT%T') BETWEEN r.dateTime AND DATE_ADD(r.dateTime, INTERVAL r.duration MINUTE) " +
+							"OR DATE_ADD(STR_TO_DATE(?, '%Y-%m-%dT%T'), INTERVAL ? MINUTE) BETWEEN r.dateTime AND DATE_ADD(r.dateTime, INTERVAL r.duration MINUTE)) ", 
+							[dateTime, dateTime, duration]);
 
 			console.log("\nROWS IN RESTAURANT_TABLES: " + rows)	
 			// Insert iterative logic here for multiple tables if the guestCount exceeds 4
@@ -56,8 +57,9 @@ class ReservationService
 
 				for (let i = 0; i < tablesToAllocate.length; i++) {
 					totalSeatsInAllocatedTables = totalSeatsInAllocatedTables + tablesToAllocate[i].seatCount
+
 					await connection.execute("INSERT INTO reservations (username, tableNumber, name, guestCount, dateTime, duration) VALUES (?, ?, ?, ?, ?, ?)", 
-                		[username, tablesToAllocate[i].tableNumber, name, guestCount, dateTime, 120]);
+                		[username, tablesToAllocate[i].tableNumber, name, guestCount, dateTime, duration]);
 				}
 
 				if (guestCount > totalSeatsInAllocatedTables) 
