@@ -66,9 +66,10 @@ document.querySelector("#login-form").addEventListener("submit", e => {
 			{
 				alert(json.error)
 			})
+			
 			return;
 		}
-		window.location.href = "http://localhost:3000/reservation";
+		window.location.href = "/reservation";
 	})
 });
 

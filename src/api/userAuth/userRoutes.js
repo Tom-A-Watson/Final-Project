@@ -84,10 +84,9 @@ class UserRoutes
 				res.json(loginResult);
 				return;
 			}
-			console.log("Before ------------------------" + user);
-
+			
 			req.session.user = loginResult.user;
-			console.log("HEREE ------------------------" + JSON.stringify(req.session.user) );
+			
 			res.sendStatus(200);
 		})
 
@@ -98,7 +97,6 @@ class UserRoutes
 
 		router.get("/api/user/isloggedin", async function (req, res) 
 		{	
-			console.log("HEREE isLoggedIn ------------------------" + req.session.user);
 			if (req.session.user == null)
 			{
 				res.status(403);
@@ -136,14 +134,11 @@ class UserRoutes
 
 		router.post("/user/profile", upload.none(), async function(req, res)
 		{
-			console.log("Editing = " + JSON.stringify(req.body));
 			let username = req.session.user.username;
 			let email = req.session.user.email;
 			userService.findUser(username).then((details) => {
 				userService.findReservations(username).then((reservations) => 
-				{	
-					console.log("Editing = " + JSON.stringify(req.body));
-					
+				{						
 					switch(req.body.editAction) 
 					{
 						case "beginEdit":
@@ -157,9 +152,8 @@ class UserRoutes
 						case "saveEdit":
 							let newUsername = req.body.username;
 							let newEmail = req.body.email;
-							userService.updateUserProfile(username, email, newUsername, newEmail).then(result => { 
-								console.log("ROUTE UPDATE CALLED = " + JSON.stringify(result));
-								
+
+							userService.updateUserProfile(username, email, newUsername, newEmail).then(result => { 								
 								if (result.success) 
 								{
 									req.session.user.username = newUsername;
@@ -219,8 +213,6 @@ class UserRoutes
 		{
 			let username = req.params.username;
 			let userDeleted = await userService.deleteUser(username);
-
-			console.log("DELETED USER RESULT:" + JSON.stringify(userDeleted))
 
 			if (!userDeleted) 
 			{

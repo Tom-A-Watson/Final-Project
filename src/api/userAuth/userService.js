@@ -38,7 +38,6 @@ class UserService
 		let connection = await dbConnect();
 		let [rows, fields] = await connection.execute("DELETE FROM users WHERE username=?", [username]);
 
-		console.log("DELETED ROWS:" + JSON.stringify(rows))
 		return (rows.affectedRows > 0);
 	}
 
@@ -65,7 +64,6 @@ class UserService
 		await connection.execute("UPDATE users SET username=?, email=? WHERE username=?", [newUsername, newEmail, currentUsername]);
 		await connection.execute("UPDATE reservations SET username=? WHERE username=?", [newUsername, currentUsername]);
 
-		console.log("USER PROFILE updated");
 		return { success: true };
 	}
 

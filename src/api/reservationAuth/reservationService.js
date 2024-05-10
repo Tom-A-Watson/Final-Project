@@ -46,10 +46,6 @@ class ReservationService
 							"OR DATE_ADD(STR_TO_DATE(?, '%Y-%m-%dT%T'), INTERVAL ? MINUTE) BETWEEN r.dateTime AND DATE_ADD(r.dateTime, INTERVAL r.duration MINUTE)) ", 
 							[dateTime, dateTime, duration]);
 
-			console.log("\nROWS IN RESTAURANT_TABLES: " + rows)	
-			// Insert iterative logic here for multiple tables if the guestCount exceeds 4
-			console.log("\nTables available for the reservation are: " + JSON.stringify(this.allocateTables(rows, guestCount)))
-			
 			if (rows.length > 0) 
 			{
 				let tablesToAllocate = this.allocateTables(rows, guestCount);
